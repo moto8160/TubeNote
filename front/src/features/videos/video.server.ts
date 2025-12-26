@@ -1,5 +1,5 @@
 'use server';
-import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from '../videos/video.type';
+import { VideoDetailResponse, VideoListResponse } from '../videos/video.type';
 
 export async function fetchVideos(): Promise<VideoListResponse[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos`);
@@ -17,21 +17,6 @@ export async function fetchVideoDetail(videoId: string): Promise<VideoDetailResp
 
   if (!res.ok) {
     throw new Error(json.message ?? 'Failed to fetch video');
-  }
-
-  return json;
-}
-
-export async function fetchOEmbed(videoUrl: string): Promise<YoutubeOEmbedResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos/preview`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ videoUrl }),
-  });
-  const json = await res.json();
-
-  if (!res.ok) {
-    throw new Error(json.message ?? 'Failed to fetch video Preview');
   }
 
   return json;

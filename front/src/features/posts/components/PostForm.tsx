@@ -1,10 +1,10 @@
 'use client';
 import { YoutubeOEmbedResponse } from '@/features/videos/video.type';
-import { startTransition, useEffect, useState } from 'react';
+import {  useEffect, useState } from 'react';
 import Image from 'next/image';
-import { fetchOEmbed } from '@/features/videos/video.server';
 import { createPost } from '@/features/posts/post.server';
 import { redirect } from 'next/navigation';
+import { fetchOEmbed } from '@/features/videos/video.client';
 
 export default function PostForm() {
   const [url, setUrl] = useState('');
@@ -17,17 +17,21 @@ export default function PostForm() {
   useEffect(() => {
     if (!url) return;
 
-    const timer = setTimeout(() => {
-      // Server Actions
-      startTransition(() => {
-        fetchOEmbed(url)
-          .then((video) => {
-            setVideo(video);
-            setUrlMessage('');
-          })
-          .catch((e) => setUrlMessage(e.message));
-      });
-    }, 500);
+    const timer = setTimeout(async() => {
+      try {
+        // 動画のプレビューを取得
+        const video = await fetchOEmbed(url);
+        setVideo(video);
+        setUrlMessage('');
+      } catch (e) {
+        if (e instanceof Error) {
+          setUrlMessage(e.message);
+          setVideo(null);
+        } else {
+          setUrlMessage('エラーが発生しました');
+        }
+      }
+    });
 
     // クリーンアップ
     return () => {
