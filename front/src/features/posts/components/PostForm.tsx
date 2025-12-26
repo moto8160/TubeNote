@@ -19,20 +19,13 @@ export default function PostForm() {
 
     const timer = setTimeout(() => {
       // Server Actions
-      startTransition(async () => {
-        try {
-          // 動画のプレビューを取得
-          const video = await fetchOEmbed(url);
-          setVideo(video);
-          setUrlMessage('');
-        } catch (e) {
-          if (e instanceof Error) {
-            setUrlMessage(e.message);
-            setVideo(null);
-          } else {
-            setUrlMessage('エラーが発生しました');
-          }
-        }
+      startTransition(() => {
+        fetchOEmbed(url)
+          .then((video) => {
+            setVideo(video);
+            setUrlMessage('');
+          })
+          .catch((e) => setUrlMessage(e.message));
       });
     }, 500);
 
