@@ -1,0 +1,65 @@
+{
+  "node": {
+    "006a1d97bc94ab9be0fff59f6e86b08aff520757ad": {
+      "workers": {
+        "app/users/me/page": {
+          "moduleId": "[project]/.next-internal/server/app/users/me/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/users/user.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/utils/fetchWithToken.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchMyPage",
+          "filename": "src/features/users/user.server.ts"
+        }
+      },
+      "layer": {
+        "app/users/me/page": "rsc"
+      },
+      "exportedName": "fetchMyPage",
+      "filename": "src/features/users/user.server.ts"
+    },
+    "008262c9abce694cfc8a89253ec7ee8e483ac9b21f": {
+      "workers": {
+        "app/users/me/page": {
+          "moduleId": "[project]/.next-internal/server/app/users/me/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/users/user.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/utils/fetchWithToken.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchMyPosts",
+          "filename": "src/features/users/user.server.ts"
+        }
+      },
+      "layer": {
+        "app/users/me/page": "rsc"
+      },
+      "exportedName": "fetchMyPosts",
+      "filename": "src/features/users/user.server.ts"
+    },
+    "40ec8c22c992741933c027ca9b9cad7d75b2656226": {
+      "workers": {
+        "app/users/me/page": {
+          "moduleId": "[project]/.next-internal/server/app/users/me/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/users/user.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/utils/fetchWithToken.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createUser",
+          "filename": "src/features/users/user.server.ts"
+        }
+      },
+      "layer": {
+        "app/users/me/page": "rsc"
+      },
+      "exportedName": "createUser",
+      "filename": "src/features/users/user.server.ts"
+    },
+    "60402829d3e65c8db49d5ca32446c3bc8d8d1f10b3": {
+      "workers": {
+        "app/users/me/page": {
+          "moduleId": "[project]/.next-internal/server/app/users/me/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/users/user.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/utils/fetchWithToken.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchWithToken",
+          "filename": "src/utils/fetchWithToken.ts"
+        }
+      },
+      "layer": {
+        "app/users/me/page": "rsc"
+      },
+      "exportedName": "fetchWithToken",
+      "filename": "src/utils/fetchWithToken.ts"
+    }
+  },
+  "edge": {}
+}

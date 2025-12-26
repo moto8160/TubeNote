@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/app/videos/%5Bid%5D/page.tsx"],"sourcesContent":["import fetchVideoDetail from '@/features/videos/video.server';\r\nimport { VideoDetailResponse } from '@/features/videos/video.type';\r\n\r\nexport default async function VideoDetailPage({ params }: { params: Promise<{ id: string }> }) {\r\n  const { id } = await params; //分割代入(params.id → id)\r\n  const video: VideoDetailResponse = await fetchVideoDetail(id);\r\n\r\n  return <div>{/* {video._count} */}</div>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAGe,eAAe,gBAAgB,EAAE,MAAM,EAAuC;IAC3F,MAAM,EAAE,EAAE,EAAE,GAAG,MAAM,QAAQ,sBAAsB;IACnD,MAAM,QAA6B,MAAM,IAAA,uJAAgB,EAAC;IAE1D,qBAAO,8OAAC;;;;;AACV"}}]
+}

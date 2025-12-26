@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/app/users/%5Bid%5D/page.tsx"],"sourcesContent":["export default async function UserDetailPage({ params }: { params: Promise<{ id: string }> }) {\r\n  const { id } = await params;\r\n  const user = await fetchUserDetail(id);\r\n}\r\n"],"names":[],"mappings":";;;;AAAe,eAAe,eAAe,EAAE,MAAM,EAAuC;IAC1F,MAAM,EAAE,EAAE,EAAE,GAAG,MAAM;IACrB,MAAM,OAAO,MAAM,gBAAgB;AACrC"}}]
+}

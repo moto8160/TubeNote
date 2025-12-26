@@ -1,0 +1,35 @@
+{
+  "node": {
+    "40cc40082ccedf3bb7f479c5fa0eae29b955b97b4a": {
+      "workers": {
+        "app/posts/create/page": {
+          "moduleId": "[project]/.next-internal/server/app/posts/create/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/videos/video.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/features/posts/post.server.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchOEmbed",
+          "filename": "src/features/videos/video.server.ts"
+        }
+      },
+      "layer": {
+        "app/posts/create/page": "action-browser"
+      },
+      "exportedName": "fetchOEmbed",
+      "filename": "src/features/videos/video.server.ts"
+    },
+    "4093d5243775fc4a8a846b4f90a5952fb73a841e8d": {
+      "workers": {
+        "app/posts/create/page": {
+          "moduleId": "[project]/.next-internal/server/app/posts/create/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/videos/video.server.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/features/posts/post.server.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createPost",
+          "filename": "src/features/posts/post.server.ts"
+        }
+      },
+      "layer": {
+        "app/posts/create/page": "action-browser"
+      },
+      "exportedName": "createPost",
+      "filename": "src/features/posts/post.server.ts"
+    }
+  },
+  "edge": {}
+}

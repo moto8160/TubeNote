@@ -1,0 +1,76 @@
+[00:00:03.775] Server  WARN     ⚠ The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: https://nextjs.org/docs/messages/middleware-to-proxy
+[00:00:04.295] Server  LOG      ✓ Ready in 3.4s
+[00:00:18.462] Server  LOG      ○ Compiling / ...
+[00:00:21.621] Server  ERROR   C:\Users\user\WORK\TubeNote\front\node_modules\next\dist\compiled\next-server\app-page-turbo.runtime.dev.js: Invalid source map. Only conformant source maps can be used to find the original code. Cause: Error: sourceMapURL could not be parsed
+[00:00:21.624] Server  ERROR    ⨯ Error: br is a self-closing tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:00:23.474] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:24.105] Browser ERROR   uncaughtError: Error: br is a void element tag and must neither have `children` nor use `dangerouslySetInnerHTML`.
+[00:00:49.180] Browser ERROR   ./src/app/page.tsx:59:17
+Parsing ecmascript source code failed
+  57 |                 <>コメント欄・付箋・メモ帳など…
+  58 |                 つべのーとなら1つの場所にまとめて管理できます。
+> 59 |               </p>
+     |                 ^
+  60 |             </div>
+  61 |
+  62 |             <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
+
+Expected '</', got 'p'
+[00:00:58.053] Server  LOG      ✓ Compiled in 64ms
+[00:01:01.526] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:01:03.626] Server  LOG      ✓ Compiled in 639ms
+[00:01:05.863] Server  LOG      ✓ Compiled in 1185ms
+[00:01:08.700] Server  LOG      ✓ Compiled in 46ms
+[00:08:00.117] Server  LOG      ✓ Compiled in 252ms
+[00:08:02.953] Server  LOG      ✓ Compiled in 228ms
+[00:11:10.208] Server  LOG      ✓ Compiled in 785ms
+[00:11:58.369] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:13:18.849] Server  LOG      ✓ Compiled in 201ms
+[00:14:13.632] Server  LOG      ✓ Compiled in 125ms
+[00:14:20.332] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:15:26.144] Server  LOG      ✓ Compiled in 506ms
+[00:15:54.423] Server  LOG      ✓ Compiled in 118ms
+[00:16:11.020] Server  WARN     ⚠ The "images.domains" configuration is deprecated. Please use "images.remotePatterns" configuration instead.
+[00:16:36.954] Server  LOG      ✓ Compiled in 147ms
+[00:16:41.741] Server  LOG      ✓ Compiled in 98ms
+[00:16:43.396] Server  LOG      ✓ Compiled in 65ms
+[00:16:57.164] Server  LOG      ✓ Compiled in 59ms
+[00:17:21.432] Server  LOG      ✓ Compiled in 54ms
+[00:17:28.524] Server  LOG      ✓ Compiled in 142ms
+[00:17:37.490] Browser ERROR   unhandledRejection: Error: An unexpected response was received from the server.
+[00:17:51.374] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:18:28.819] Server  LOG      ✓ Compiled in 644ms
+[00:19:00.832] Server  LOG      ✓ Compiled in 67ms
+[00:19:05.254] Server  LOG      ✓ Compiled in 61ms
+[00:19:10.359] Server  LOG      ✓ Compiled in 55ms
+[00:19:15.419] Server  LOG      ✓ Compiled in 55ms
+[00:19:39.692] Server  LOG      ✓ Compiled in 105ms
+[00:19:43.029] Server  LOG      ✓ Compiled in 56ms
+[00:19:54.508] Server  LOG      ✓ Compiled in 55ms
+[00:19:56.370] Server  LOG      ✓ Compiled in 126ms
+[00:20:04.819] Server  LOG      ✓ Compiled in 80ms
+[00:20:09.285] Server  LOG      ✓ Compiled in 99ms
+[00:20:16.654] Server  LOG      ✓ Compiled in 52ms
+[00:20:18.629] Server  LOG      ✓ Compiled in 150ms
+[00:20:20.283] Server  LOG      ✓ Compiled in 44ms
+[00:20:22.989] Server  LOG      ✓ Compiled in 71ms
+[00:20:25.152] Server  LOG      ✓ Compiled in 42ms
+[00:21:11.880] Server  LOG      ✓ Compiled in 73ms
+[00:21:21.882] Server  LOG      ✓ Compiled in 130ms
+[00:22:42.662] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:23:13.368] Server  LOG      ✓ Compiled in 260ms
+[00:23:15.159] Server  LOG      ✓ Compiled in 234ms
+[00:23:16.755] Server  LOG      ✓ Compiled in 221ms
+[00:25:05.785] Server  LOG      ✓ Compiled in 196ms
+[00:25:11.737] Server  LOG      ✓ Compiled in 55ms
+[00:27:49.591] Server  LOG      ✓ Compiled in 2.5s
+[00:28:01.106] Server  LOG      ✓ Compiled in 90ms
+[00:28:13.519] Server  LOG      ✓ Compiled in 75ms
+[00:28:18.767] Server  LOG      ✓ Compiled in 58ms
+[00:31:27.037] Server  LOG      ✓ Compiled in 1361ms
+[00:31:28.557] Server  LOG      ✓ Compiled in 549ms
+[00:31:32.180] Server  LOG      ✓ Compiled in 209ms
+[00:33:13.677] Server  LOG      ✓ Compiled in 590ms
+[00:36:53.256] Server  LOG      ✓ Compiled in 87ms
+[00:36:58.144] Server  LOG      ✓ Compiled in 213ms
+[00:36:59.603] Server  LOG      ✓ Compiled in 192ms

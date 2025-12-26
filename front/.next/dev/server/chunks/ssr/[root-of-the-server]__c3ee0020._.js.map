@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/app/test2/page.tsx"],"sourcesContent":["import { useState } from 'react';\r\n\r\nexport default function Page() {\r\n  const [count, setCount] = useState(0);\r\n\r\n  const handleChange = () => {\r\n    setCount(count + 1);\r\n  };\r\n\r\n  return (\r\n    <div>\r\n      <h1>{count}</h1>\r\n      <button onClick={handleChange}>ボタン</button>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,MAAM,CAAC,OAAO,SAAS,GAAG,IAAA,iNAAQ,EAAC;IAEnC,MAAM,eAAe;QACnB,SAAS,QAAQ;IACnB;IAEA,qBACE,8OAAC;;0BACC,8OAAC;0BAAI;;;;;;0BACL,8OAAC;gBAAO,SAAS;0BAAc;;;;;;;;;;;;AAGrC"}}]
+}

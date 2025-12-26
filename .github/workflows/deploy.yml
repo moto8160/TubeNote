@@ -1,0 +1,45 @@
+#GitHub Actions名
+name: Deploy to Lightsail
+
+#実行タイミング
+on:
+  push:
+    branches: ["main"]
+
+#job定義
+jobs:
+  #job名定義（並列実行）
+  deploy:
+    runs-on: ubuntu-latest  #job実行するOS(ランナー)
+
+    steps:
+      #リポジトリをこの環境に取り込み
+      - name: Checkout repository  #step名
+        uses: actions/checkout@v3  #外部のAction
+
+      - name: GitHub Secretsから秘密鍵をインストール
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: サーバー処理
+        run: |
+          #SSH接続
+          ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
+          
+          cd ~/TubeNote
+          git pull
+
+          #フロントのビルド
+          cd ~/TubeNote/front
+          npm install
+          npm run build
+          pm2 restart tubenote-front
+
+          #バックのビルド
+          cd ~/TubeNote/back
+          npm install
+          npm run build
+          pm2 restart tubenote-api
+
+          EOF

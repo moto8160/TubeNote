@@ -1,0 +1,78 @@
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma.service';
+import { CreateUserDto, MyPageResponse, MyPostsResponse } from './user.dto';
+import * as bcrypt from 'bcrypt';
+import { User } from '@prisma/client';
+
+@Injectable()
+export class UsersService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async getMyPosts(userId: number): Promise<MyPostsResponse> {
+    const user = await this.prisma.user.findUniqueOrThrow({
+      where: { id: userId },
+      select: {
+        id: true,
+        name: true,
+        createdAt: true,
+        _count: { select: { posts: true } },
+        posts: {
+          orderBy: { updatedAt: 'desc' },
+          include: {
+            user: { select: { id: true, name: true } },
+            video: true,
+          },
+        },
+      },
+    });
+
+    return user;
+  }
+
+  async getMayPage(userId: number): Promise<MyPageResponse> {
+    const user = await this.prisma.user.findUniqueOrThrow({
+      where: { id: userId },
+      select: { id: true, name: true, email: true, createdAt: true },
+    });
+
+    const postCount = await this.prisma.post.count({
+      where: { userId },
+    });
+
+    const videos = await this.prisma.post.findMany({
+      where: { userId },
+      select: { videoId: true },
+      distinct: ['videoId'],
+    });
+    const videoCount = videos.length;
+
+    return { user, postCount, videoCount };
+  }
+
+  async findUserByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
+  async createUser(dto: CreateUserDto) {
+    const { name, email, password, passwordConfirm } = dto;
+
+    if (password !== passwordConfirm) {
+      throw new BadRequestException('パスワードが一致しません');
+    }
+
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+    if (user) {
+      throw new BadRequestException('メールアドレスが登録済みです');
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+
+    await this.prisma.user.create({
+      data: { name, email, password: hash },
+    });
+  }
+}

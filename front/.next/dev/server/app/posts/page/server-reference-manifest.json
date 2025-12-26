@@ -1,0 +1,50 @@
+{
+  "node": {
+    "000c4517bc4814d9ee4880f08b561a3bda3a2a4a2b": {
+      "workers": {
+        "app/posts/page": {
+          "moduleId": "[project]/.next-internal/server/app/posts/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/posts/post.server.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchPosts",
+          "filename": "src/features/posts/post.server.ts"
+        }
+      },
+      "layer": {
+        "app/posts/page": "rsc"
+      },
+      "exportedName": "fetchPosts",
+      "filename": "src/features/posts/post.server.ts"
+    },
+    "4093d5243775fc4a8a846b4f90a5952fb73a841e8d": {
+      "workers": {
+        "app/posts/page": {
+          "moduleId": "[project]/.next-internal/server/app/posts/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/posts/post.server.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "createPost",
+          "filename": "src/features/posts/post.server.ts"
+        }
+      },
+      "layer": {
+        "app/posts/page": "rsc"
+      },
+      "exportedName": "createPost",
+      "filename": "src/features/posts/post.server.ts"
+    },
+    "40ad8fd201bbec3a9dde4a20a6424a4e470ca5829f": {
+      "workers": {
+        "app/posts/page": {
+          "moduleId": "[project]/.next-internal/server/app/posts/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/features/posts/post.server.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "exportedName": "fetchOEmbed",
+          "filename": "src/features/posts/post.server.ts"
+        }
+      },
+      "layer": {
+        "app/posts/page": "rsc"
+      },
+      "exportedName": "fetchOEmbed",
+      "filename": "src/features/posts/post.server.ts"
+    }
+  },
+  "edge": {}
+}
