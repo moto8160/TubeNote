@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/components/FlashMessage.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { useSearchParams } from 'next/navigation';\r\n\r\nexport default function FlashMessage() {\r\n  //クエリ文字列を取得\r\n  const searchParams = useSearchParams();\r\n  // パラメータを取得\r\n  const success = searchParams.get('success');\r\n\r\n  if (!success) return null;\r\n  let message;\r\n\r\n  switch (success) {\r\n    case '1':\r\n      message = 'ログインしました';\r\n      break;\r\n    case '2':\r\n      message = '新規投稿しました';\r\n      break;\r\n  }\r\n  return <div className=\"max-w-7xl mx-auto px-4 py-2 bg-green-100 text-black rounded-md shadow\">{message}</div>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAIe,SAAS;IACtB,WAAW;IACX,MAAM,eAAe,IAAA,qJAAe;IACpC,WAAW;IACX,MAAM,UAAU,aAAa,GAAG,CAAC;IAEjC,IAAI,CAAC,SAAS,OAAO;IACrB,IAAI;IAEJ,OAAQ;QACN,KAAK;YACH,UAAU;YACV;QACF,KAAK;YACH,UAAU;YACV;IACJ;IACA,qBAAO,8OAAC;QAAI,WAAU;kBAAyE;;;;;;AACjG"}}]
-}

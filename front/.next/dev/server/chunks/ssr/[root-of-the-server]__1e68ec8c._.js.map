@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/TubeNote/front/src/utils/sendEmail.ts"],"sourcesContent":["'use server';\r\nimport { Resend } from 'resend';\r\n\r\nexport async function sendEmail(formdata: FormData) {\r\n  const email = formdata.get('email');\r\n  const message = formdata.get('message');\r\n\r\n  const resend = new Resend(process.env.RESEND_API_KEY);\r\n\r\n  await resend.emails.send({\r\n    from: 'onboarding@resend.dev',\r\n    to: process.env.CONTACT_EMAIL!,\r\n    subject: 'TubeNote お問い合わせ',\r\n    html: `\r\n      <p>送信者</p>\r\n      <p>${email}</p>\r\n      <p>内容</p>\r\n      <p>${String(message).replace(/\\n/, '<br>')}</p>\r\n  `,\r\n  });\r\n}\r\n"],"names":[],"mappings":";;;;;AACA;;;;AAEO,eAAe,UAAU,QAAkB;IAChD,MAAM,QAAQ,SAAS,GAAG,CAAC;IAC3B,MAAM,UAAU,SAAS,GAAG,CAAC;IAE7B,MAAM,SAAS,IAAI,kJAAM,CAAC,QAAQ,GAAG,CAAC,cAAc;IAEpD,MAAM,OAAO,MAAM,CAAC,IAAI,CAAC;QACvB,MAAM;QACN,IAAI,QAAQ,GAAG,CAAC,aAAa;QAC7B,SAAS;QACT,MAAM,CAAC;;SAEF,EAAE,MAAM;;SAER,EAAE,OAAO,SAAS,OAAO,CAAC,MAAM,QAAQ;EAC/C,CAAC;IACD;AACF;;;IAjBsB;;AAAA,+OAAA"}},
-    {"offset": {"line": 44, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/TubeNote/front/.next-internal/server/app/page/actions.js%20%28server%20actions%20loader%29"],"sourcesContent":["export {sendEmail as '406422d7b464a5a2704e04e0173523407e6d4719e8'} from 'ACTIONS_MODULE0'\n"],"names":[],"mappings":";AAAA"}}]
-}

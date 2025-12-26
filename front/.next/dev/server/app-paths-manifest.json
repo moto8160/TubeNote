@@ -1,9 +1,0 @@
-{
-  "/login/page": "app/login/page.js",
-  "/mypage/page": "app/mypage/page.js",
-  "/page": "app/page.js",
-  "/posts/create/page": "app/posts/create/page.js",
-  "/users/create/page": "app/users/create/page.js",
-  "/users/me/page": "app/users/me/page.js",
-  "/videos/page": "app/videos/page.js"
-}

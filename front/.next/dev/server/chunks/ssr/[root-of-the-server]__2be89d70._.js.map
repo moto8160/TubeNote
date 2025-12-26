@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 18, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/app/users/me/page.tsx"],"sourcesContent":["import { fetchUserMe } from '@/features/users/user.server';\r\n\r\nexport default async function MyPage() {\r\n  const myUser = await fetchUserMe();\r\n  console.log(myUser);\r\n\r\n  return (\r\n    <div>\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,eAAe;IAC5B,MAAM,SAAS,MAAM,IAAA,yJAAW;IAChC,QAAQ,GAAG,CAAC;IAEZ,qBACE,8OAAC;;;;;AAGL"}}]
-}

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 16, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/middleware.ts"],"sourcesContent":["import { NextRequest, NextResponse } from 'next/server';\r\n\r\nexport function middleware(req: NextRequest) {\r\n  const token = req.cookies.get('token')?.value;\r\n  const path = req.nextUrl.pathname;\r\n\r\n  const publicPaths = ['/', '/videos', '/login', '/users/create'];\r\n\r\n  // 未ログイン\r\n  if (!token) {\r\n    if (!publicPaths.includes(path)) {\r\n      return NextResponse.redirect(new URL('/login?error=1', req.url));\r\n    }\r\n  }\r\n\r\n  return NextResponse.next();\r\n}\r\n\r\nexport const config = {\r\n  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|.well-known).*)'],\r\n};\r\n"],"names":[],"mappings":";;;;;;AAAA;AAAA;;AAEO,SAAS,WAAW,GAAgB;IACzC,MAAM,QAAQ,IAAI,OAAO,CAAC,GAAG,CAAC,UAAU;IACxC,MAAM,OAAO,IAAI,OAAO,CAAC,QAAQ;IAEjC,MAAM,cAAc;QAAC;QAAK;QAAW;QAAU;KAAgB;IAE/D,QAAQ;IACR,IAAI,CAAC,OAAO;QACV,IAAI,CAAC,YAAY,QAAQ,CAAC,OAAO;YAC/B,OAAO,gMAAY,CAAC,QAAQ,CAAC,IAAI,IAAI,kBAAkB,IAAI,GAAG;QAChE;IACF;IAEA,OAAO,gMAAY,CAAC,IAAI;AAC1B;AAEO,MAAM,SAAS;IACpB,SAAS;QAAC;KAAgE;AAC5E"}}]
-}

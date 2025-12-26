@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/user/WORK/youtube-post/front/src/app/components/ToastProvider.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { cookies } from 'next/headers';\r\nimport { useEffect } from 'react';\r\n\r\ntype Props = {\r\n  flash: string;\r\n};\r\n\r\nexport default function ToastProvider({ flash }: Props) {\r\n  useEffect(() => {\r\n    const run = async () => {\r\n      const cookieStore = await cookies();\r\n      const flash = await cookieStore.get('flash');\r\n    };\r\n    run();\r\n  }, []);\r\n\r\n  return <div>{flash}</div>;\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AACA;AAHA;;;;AASe,SAAS,cAAc,EAAE,KAAK,EAAS;IACpD,IAAA,kNAAS,EAAC;QACR,MAAM,MAAM;YACV,MAAM,cAAc,MAAM,IAAA,0IAAO;YACjC,MAAM,QAAQ,MAAM,YAAY,GAAG,CAAC;QACtC;QACA;IACF,GAAG,EAAE;IAEL,qBAAO,8OAAC;kBAAK;;;;;;AACf"}}]
-}
