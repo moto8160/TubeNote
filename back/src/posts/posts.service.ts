@@ -2,6 +2,7 @@ import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreatePostDto, PostListResponse } from './post.dto';
 import { VideosService } from 'src/videos/videos.service';
+import { Post } from '@prisma/client';
 
 @Injectable()
 export class PostsService {
@@ -30,13 +31,19 @@ export class PostsService {
   }
 
   async delete(postId: number, userId: number) {
-    await this.checkOwnPost(postId, userId);
+    const post = await this.checkOwnPost(postId, userId);
     await this.prisma.post.delete({
       where: { id: postId },
     });
+
+    // 動画に紐づく投稿は1件以上とるする
+    const postCount = await this.countPostByVideoId(post.videoId);
+    if (postCount === 0) {
+      await this.videosService.delete(post.videoId);
+    }
   }
 
-  async checkOwnPost(postId: number, userId: number) {
+  async checkOwnPost(postId: number, userId: number): Promise<Post> {
     const post = await this.prisma.post.findUniqueOrThrow({
       where: { id: postId },
     });
@@ -44,5 +51,13 @@ export class PostsService {
     if (post.userId !== userId) {
       throw new ForbiddenException();
     }
+
+    return post;
+  }
+
+  async countPostByVideoId(videoId: number): Promise<number> {
+    return this.prisma.post.count({
+      where: { videoId },
+    });
   }
 }

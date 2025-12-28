@@ -43,6 +43,10 @@ export class VideosService {
     return video;
   }
 
+  async delete(videoId: number) {
+    await this.prisma.video.delete({ where: { id: videoId } });
+  }
+
   async findOrCreateByUrl(videoUrl: string): Promise<Video> {
     // 動画登録チェック
     const video = await this.prisma.video.findUnique({

@@ -24,7 +24,7 @@ export default function Header({ currentUserId }: Props) {
             つべのーと
           </Link>
 
-          <Link href="/videos" className={pathname === '/videos' ? active : normal}>
+          <Link href="/videos" className={pathname.startsWith('/videos') ? active : normal}>
             みんなのノート
           </Link>
 

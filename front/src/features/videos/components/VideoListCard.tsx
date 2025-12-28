@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { VideoListResponse } from '../video.type';
 import Image from 'next/image';
-import PostContent from './PostContent';
+import PostContent from '@/features/posts/components/PostContent';
 
 type Props = {
   video: VideoListResponse;

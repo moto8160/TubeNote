@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation';
 import { fetchOEmbed } from '@/features/videos/video.server';
 import { YoutubeOEmbedResponse } from '@/features/videos/video.type';
 
-export default function PostForm() {
+export default function CreateForm() {
   const [url, setUrl] = useState('');
   const [text, setText] = useState('');
   const [video, setVideo] = useState<YoutubeOEmbedResponse | null>(null);

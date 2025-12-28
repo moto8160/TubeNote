@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { VideoDetailResponse } from '../video.type';
+import PostCardContent from '@/features/posts/components/PostCardContent';
 
 type Props = {
   video: VideoDetailResponse;
@@ -7,7 +8,7 @@ type Props = {
 
 export default function VideoDetailCard({ video }: Props) {
   return (
-    <div className="">
+    <>
       <div className="flex flex-col sm:flex-row gap-6 bg-white rounded-xl shadow-sm p-6">
         {/* 動画 */}
         <div className="w-full sm:w-100">
@@ -29,7 +30,24 @@ export default function VideoDetailCard({ video }: Props) {
       {/* ポスト */}
       <p className="text-lg font-semibold ml-2 mt-6 mb-2">{video._count.posts} 件の投稿</p>
 
-      <ul className="space-y-2">
+      <div>
+        <ul className="space-y-4">
+          {video.posts.map((post) => (
+            <li key={post.id}>
+              <div className="bg-white border border-sky-50 rounded-2xl p-6 shadow-sm">
+                <PostCardContent
+                  id={post.id}
+                  text={post.text}
+                  updatedAt={post.updatedAt}
+                  username={post.user.name}
+                />
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* <ul className="space-y-2">
         {video.posts.map((post) => (
           <li key={post.id} className="bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center justify-between">
@@ -42,7 +60,7 @@ export default function VideoDetailCard({ video }: Props) {
             <p className="whitespace-pre-wrap leading-loose wrap-break-word">{post.text}</p>
           </li>
         ))}
-      </ul>
-    </div>
+      </ul> */}
+    </>
   );
 }

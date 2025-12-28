@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { VideoListResponse } from '../video.type';
 import VideoListCard from './VideoListCard';
 import { PostListResponse } from '@/features/posts/post.type';
-import PostListCard from './PostListCard';
 import { useRouter } from 'next/navigation';
 import { useSearchParams } from 'next/navigation';
+import PostListCard from '@/features/posts/components/PostListCard';
 
 type Props = {
   videos: VideoListResponse[];
@@ -25,7 +25,7 @@ export default function TabContainer({ videos, posts }: Props) {
   };
 
   return (
-    <div className="">
+    <>
       <div className="mb-6">
         <div className="flex justify-center text-xl gap-6">
           <button
@@ -66,6 +66,6 @@ export default function TabContainer({ videos, posts }: Props) {
           ))}
         </ul>
       )}
-    </div>
+    </>
   );
 }
