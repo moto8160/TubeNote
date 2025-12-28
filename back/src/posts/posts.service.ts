@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreatePostDto, PostListResponse } from './post.dto';
 import { VideosService } from 'src/videos/videos.service';
@@ -27,5 +27,22 @@ export class PostsService {
     await this.prisma.post.create({
       data: { userId, videoId: video.id, text: dto.text },
     });
+  }
+
+  async delete(postId: number, userId: number) {
+    await this.checkOwnPost(postId, userId);
+    await this.prisma.post.delete({
+      where: { id: postId },
+    });
+  }
+
+  async checkOwnPost(postId: number, userId: number) {
+    const post = await this.prisma.post.findUniqueOrThrow({
+      where: { id: postId },
+    });
+
+    if (post.userId !== userId) {
+      throw new ForbiddenException();
+    }
   }
 }

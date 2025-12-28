@@ -1,7 +1,7 @@
 'use server';
 import { fetchWithToken } from '@/utils/fetchWithToken';
 import { CreatePostResult, PostListResponse } from './post.type';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 
 export async function fetchPosts(): Promise<PostListResponse[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
@@ -29,4 +29,19 @@ export async function createPost(formData: FormData): Promise<CreatePostResult> 
   }
 
   return json;
+}
+
+export async function deletePost(formData: FormData): Promise<void | { success: boolean }> {
+  const postId = formData.get('postId');
+  const currentPath = formData.get('currentPath');
+
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}`, {
+    method: 'DELETE',
+  });
+
+  if (!res.ok) {
+    return { success: false };
+  }
+
+  redirect(currentPath + '&success=4');
 }
