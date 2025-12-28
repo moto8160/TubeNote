@@ -25,7 +25,7 @@ export type VideoDetailResponse = Prisma.VideoGetPayload<{
 export class YoutubeOEmbedResponse {
   html: string;
   title: string;
-  author_name: string;
-  author_url: string;
-  thumbnail_url: string;
+  authorName: string;
+  authorUrl: string;
+  thumbnailUrl: string;
 }

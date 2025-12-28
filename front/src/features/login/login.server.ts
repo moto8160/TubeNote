@@ -15,19 +15,8 @@ export async function login(formData: FormData): Promise<LoginResult> {
   });
   const json = await res.json();
 
-  if (res.status >= 500) {
-    throw new Error('Failed to Login');
-  }
-
   if (!res.ok) {
-    let message = json.message;
-
-    // DTOが配列でメッセージを返す
-    if (Array.isArray(message)) {
-      message = message.join('、');
-    }
-
-    return { success: false, message };
+    return { success: false, message: json.message ?? 'エラーが発生しました。' };
   }
 
   // cookieを取得

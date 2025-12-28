@@ -1,10 +1,10 @@
 'use client';
-import { YoutubeOEmbedResponse } from '@/features/videos/video.type';
-import {  useEffect, useState } from 'react';
+import { startTransition, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { createPost } from '@/features/posts/post.server';
 import { redirect } from 'next/navigation';
-import { fetchOEmbed } from '@/features/videos/video.client';
+import { fetchOEmbed } from '@/features/videos/video.server';
+import { YoutubeOEmbedResponse } from '@/features/videos/video.type';
 
 export default function PostForm() {
   const [url, setUrl] = useState('');
@@ -17,21 +17,21 @@ export default function PostForm() {
   useEffect(() => {
     if (!url) return;
 
-    const timer = setTimeout(async() => {
-      try {
-        // 動画のプレビューを取得
-        const video = await fetchOEmbed(url);
-        setVideo(video);
-        setUrlMessage('');
-      } catch (e) {
-        if (e instanceof Error) {
-          setUrlMessage(e.message);
+    const timer = setTimeout(() => {
+      // Server Actions
+      startTransition(async () => {
+        const result = await fetchOEmbed(url);
+
+        if (!result.success) {
+          setUrlMessage(result.message);
           setVideo(null);
-        } else {
-          setUrlMessage('エラーが発生しました');
+          return;
         }
-      }
-    });
+
+        setVideo(result.preview);
+        setUrlMessage('');
+      });
+    }, 500);
 
     // クリーンアップ
     return () => {
@@ -44,16 +44,13 @@ export default function PostForm() {
       <form
         // Server Actions
         action={async (formData: FormData) => {
-          try {
-            await createPost(formData);
-          } catch (e) {
-            if (e instanceof Error) {
-              setMessage(e.message);
-            } else {
-              setMessage('エラーが発生しました');
-            }
+          const result = await createPost(formData);
+
+          if (!result.success) {
+            setMessage(result.message);
             return;
           }
+
           redirect('/videos?success=2');
         }}
       >
@@ -83,15 +80,16 @@ export default function PostForm() {
             <div className="flex gap-6">
               <div className="relative w-60 aspect-video shrink-0">
                 <Image
-                  src={video.thumbnail_url}
+                  src={video.thumbnailUrl}
                   alt={video.title}
                   fill
+                  sizes="(max-width: 640px) 100vw,(max-width: 1024px) 50vw,25vw"
                   className="object-cover rounded-lg"
                 />
               </div>
               <div className="flex flex-col justify-center">
                 <p className="font-medium">{video.title}</p>
-                <p className="text-sm mt-4">{video.author_name}</p>
+                <p className="text-sm mt-4">{video.authorName}</p>
               </div>
             </div>
           ) : (

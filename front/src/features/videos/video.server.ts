@@ -1,11 +1,12 @@
 'use server';
-import { VideoDetailResponse, VideoListResponse } from '../videos/video.type';
+import { notFound } from 'next/navigation';
+import { fetchOEmbedResult, VideoDetailResponse, VideoListResponse } from '../videos/video.type';
 
 export async function fetchVideos(): Promise<VideoListResponse[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos`);
 
   if (!res.ok) {
-    throw new Error('Failed to fetch videos');
+    notFound();
   }
 
   return res.json();
@@ -16,8 +17,23 @@ export async function fetchVideoDetail(videoId: string): Promise<VideoDetailResp
   const json = await res.json();
 
   if (!res.ok) {
-    throw new Error(json.message ?? 'Failed to fetch video');
+    notFound();
   }
 
   return json;
+}
+
+export async function fetchOEmbed(videoUrl: string): Promise<fetchOEmbedResult> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos/preview`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ videoUrl }),
+  });
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { success: false, message: json.message ?? 'エラーが発生しました。' };
+  }
+
+  return { success: true, preview: json };
 }

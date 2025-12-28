@@ -31,7 +31,17 @@ export type VideoDetailResponse = VideoListResponse;
 export type YoutubeOEmbedResponse = {
   html: string;
   title: string;
-  author_name: string;
-  author_url: string;
-  thumbnail_url: string;
+  authorName: string;
+  authorUrl: string;
+  thumbnailUrl: string;
 };
+
+export type fetchOEmbedResult =
+  | {
+      success: true;
+      preview: YoutubeOEmbedResponse;
+    }
+  | {
+      success: false;
+      message: string;
+    };

@@ -1,18 +1,19 @@
 'use server';
 import { fetchWithToken } from '@/utils/fetchWithToken';
-import { PostListResponse, SuccessResponse } from './post.type';
+import { CreatePostResult, PostListResponse } from './post.type';
+import { notFound } from 'next/navigation';
 
 export async function fetchPosts(): Promise<PostListResponse[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
 
   if (!res.ok) {
-    throw new Error('Failed to fetch posts');
+    notFound();
   }
 
   return res.json();
 }
 
-export async function createPost(formData: FormData): Promise<SuccessResponse> {
+export async function createPost(formData: FormData): Promise<CreatePostResult> {
   const videoUrl = formData.get('url');
   const text = formData.get('text');
 
@@ -24,7 +25,7 @@ export async function createPost(formData: FormData): Promise<SuccessResponse> {
   const json = await res.json();
 
   if (!res.ok) {
-    throw new Error(json.message);
+    return { success: false, message: json.message ?? 'エラーが発生しました。' };
   }
 
   return json;

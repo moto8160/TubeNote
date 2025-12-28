@@ -55,16 +55,16 @@ export class VideosService {
     const videoData = await this.fetchOEmbed(videoUrl);
 
     const embedUrl = videoData.html.match(/src="([^"]+)"/)![1];
-    const { title, author_name, author_url, thumbnail_url } = videoData;
+    const { title, authorName, authorUrl, thumbnailUrl } = videoData;
 
     return this.prisma.video.create({
       data: {
         videoUrl,
         embedUrl,
         title,
-        authorName: author_name,
-        authorUrl: author_url,
-        thumbnailUrl: thumbnail_url,
+        authorName,
+        authorUrl,
+        thumbnailUrl,
       },
     });
   }
@@ -85,6 +85,16 @@ export class VideosService {
       throw new BadRequestException('動画が存在しません');
     }
 
-    return (await res.json()) as YoutubeOEmbedResponse;
+    /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+    /* eslint-disable @typescript-eslint/no-unsafe-member-access */
+    const json: any = await res.json();
+
+    return {
+      html: json.html,
+      title: json.title,
+      authorName: json.author_name,
+      authorUrl: json.author_url,
+      thumbnailUrl: json.thumbnail_url,
+    };
   }
 }
