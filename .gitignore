@@ -1,7 +1,9 @@
 **/.env
 **/.env.*
 
+#ビルド時の成果物(JSとか)
 **/.next/
-**/dist/
+**/dist/ 
 
+#外部ライブラリの本体
 **/node_modules/
