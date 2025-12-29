@@ -25,8 +25,12 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+
+  background-color: #ffffff !important;
 }
 
 html {
   scrollbar-gutter: stable;
+  background-color: #ffffff !important;
+  color-scheme: light;
 }
