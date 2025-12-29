@@ -39,7 +39,10 @@ export default function PostButton({ id }: Props) {
       >
         <input type="hidden" name="postId" value={id} />
         <input type="hidden" name="currentPath" value={pathname + '?' + searchParams} />
-        <button className="w-8 h-8 flex items-center justify-center rounded-full bg-sky-50 hover:bg-sky-100 transition">
+        <button
+          type="submit"
+          className="w-8 h-8 flex items-center justify-center rounded-full bg-sky-50 hover:bg-sky-100 transition"
+        >
           🗑️
         </button>
       </form>
