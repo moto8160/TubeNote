@@ -23,7 +23,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       </head>
       <body>
         <Header currentUserId={currentUserId} />
-        <main className={`${geistSans.variable}  antialiased `}>{children}</main>
+        <main className={`${geistSans.variable}  antialiased bg-white`}>{children}</main>
       </body>
     </html>
   );

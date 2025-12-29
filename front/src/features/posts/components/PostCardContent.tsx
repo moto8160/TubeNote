@@ -21,9 +21,11 @@ export default function PostCardContent({
     <>
       {/* ヘッダー */}
       <div className="flex items-start justify-between mb-4">
-        <div>
-          <span className="font-medium text-gray-800">{username}</span>
-          <p className="text-sm text-gray-400">{new Date(updatedAt).toLocaleDateString('ja-JP')}</p>
+        <div className="flex items-baseline gap-2">
+          <span className="font-semibold text-gray-800">{username}</span>
+          <span className="text-xs text-gray-400">
+            {new Date(updatedAt).toLocaleDateString('ja-JP')}
+          </span>
         </div>
 
         {/* 編集・削除 */}
