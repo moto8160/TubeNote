@@ -19,7 +19,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   return (
     <html lang="ja">
       <head>
-        <meta name="color-scheme" content="light" />
+        <meta name="color-scheme" content="light only" />
       </head>
       <body>
         <Header currentUserId={currentUserId} />
