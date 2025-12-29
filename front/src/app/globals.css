@@ -27,10 +27,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 
   background-color: #ffffff !important;
+  color: #111827 !important;
 }
 
 html {
   scrollbar-gutter: stable;
   background-color: #ffffff !important;
   color-scheme: light;
+  color: #111827 !important;
 }
