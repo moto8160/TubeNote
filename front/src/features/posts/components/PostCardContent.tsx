@@ -4,10 +4,19 @@ type Props = {
   id: number;
   text: string;
   updatedAt: string;
+  userId: number;
   username: string;
+  currentUserId: number | null;
 };
 
-export default function PostCardContent({ id, text, updatedAt, username }: Props) {
+export default function PostCardContent({
+  id,
+  text,
+  updatedAt,
+  userId,
+  username,
+  currentUserId,
+}: Props) {
   return (
     <>
       {/* ヘッダー */}
@@ -18,7 +27,7 @@ export default function PostCardContent({ id, text, updatedAt, username }: Props
         </div>
 
         {/* 編集・削除 */}
-        <PostButton id={id} />
+        {currentUserId === userId && <PostButton id={id} />}
       </div>
 
       {/* ボディ */}

@@ -6,14 +6,14 @@ import {
   Param,
   ParseIntPipe,
   Post,
+  Put,
   Request,
   UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto, PostListResponse, SuccessResponse } from './post.dto';
+import { CreatePostDto, PostListResponse, SuccessResponse, UpdatePostDto } from './post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import type { JwtRequest } from 'src/auth/auth.type';
-import { identity } from 'rxjs';
 
 @Controller('posts')
 export class PostsController {
@@ -24,11 +24,28 @@ export class PostsController {
     return this.postsService.findAll();
   }
 
+  @Get(':id')
+  async findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.postsService.findOne(id);
+  }
+
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() dto: CreatePostDto, @Request() req: JwtRequest): Promise<SuccessResponse> {
     const userId = req.user.userId;
     await this.postsService.create(userId, dto);
+    return { success: true };
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdatePostDto,
+    @Request() req: JwtRequest,
+  ): Promise<SuccessResponse> {
+    const userId = req.user.userId;
+    await this.postsService.update(id, dto, userId);
     return { success: true };
   }
 

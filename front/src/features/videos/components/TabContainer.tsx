@@ -10,9 +10,10 @@ import PostListCard from '@/features/posts/components/PostListCard';
 type Props = {
   videos: VideoListResponse[];
   posts: PostListResponse[];
+  currentUserId: number | null;
 };
 
-export default function TabContainer({ videos, posts }: Props) {
+export default function TabContainer({ videos, posts,currentUserId }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -31,7 +32,9 @@ export default function TabContainer({ videos, posts }: Props) {
           <button
             onClick={() => changeTab('videos')}
             className={`relative pb-2 px-2 font-medium transition ${
-              active === 'videos' ? 'font-medium border-b-3 border-blue-300' : 'text-gray-500 hover:text-gray-700'
+              active === 'videos'
+                ? 'font-medium border-b-3 border-blue-300'
+                : 'text-gray-500 hover:text-gray-700'
             }`}
           >
             動画ごと
@@ -40,7 +43,9 @@ export default function TabContainer({ videos, posts }: Props) {
           <button
             onClick={() => changeTab('posts')}
             className={`relative pb-2 px-2 font-medium transition ${
-              active === 'posts' ? 'font-medium border-b-3 border-blue-300' : 'text-gray-500 hover:text-gray-700'
+              active === 'posts'
+                ? 'font-medium border-b-3 border-blue-300'
+                : 'text-gray-500 hover:text-gray-700'
             }`}
           >
             投稿ごと
@@ -61,7 +66,7 @@ export default function TabContainer({ videos, posts }: Props) {
         <ul className="space-y-4">
           {posts.map((post) => (
             <li key={post.id}>
-              <PostListCard post={post} />
+              <PostListCard post={post} currentUserId={currentUserId} />
             </li>
           ))}
         </ul>

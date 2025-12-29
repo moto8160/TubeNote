@@ -17,4 +17,9 @@ export type PostListResponse = Post & {
   video: Video;
 };
 
+export type PostDetailResponse = Post & {
+  video: Video;
+};
+
 export type CreatePostResult = { success: true } | { success: false; message: string };
+export type UpdatePostResult = { success: true } | { success: false; message: string };

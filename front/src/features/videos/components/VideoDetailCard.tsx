@@ -4,9 +4,10 @@ import PostCardContent from '@/features/posts/components/PostCardContent';
 
 type Props = {
   video: VideoDetailResponse;
+  currentUserId: number | null;
 };
 
-export default function VideoDetailCard({ video }: Props) {
+export default function VideoDetailCard({ video, currentUserId }: Props) {
   return (
     <>
       <div className="flex flex-col sm:flex-row gap-6 bg-white rounded-xl shadow-sm p-6">
@@ -39,7 +40,9 @@ export default function VideoDetailCard({ video }: Props) {
                   id={post.id}
                   text={post.text}
                   updatedAt={post.updatedAt}
+                  userId={post.user.id}
                   username={post.user.name}
+                  currentUserId={currentUserId}
                 />
               </div>
             </li>

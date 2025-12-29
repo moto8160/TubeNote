@@ -5,16 +5,19 @@ import PostCardContent from './PostCardContent';
 
 type Props = {
   post: PostListResponse;
+  currentUserId: number | null;
 };
 
-export default function PostListCard({ post }: Props) {
+export default function PostListCard({ post, currentUserId }: Props) {
   return (
     <div className="bg-white border border-sky-50 rounded-2xl p-6 shadow-sm">
       <PostCardContent
         id={post.id}
         text={post.text}
         updatedAt={post.updatedAt}
+        userId={post.user.id}
         username={post.user.name}
+        currentUserId={currentUserId}
       />
 
       {/* フッター */}

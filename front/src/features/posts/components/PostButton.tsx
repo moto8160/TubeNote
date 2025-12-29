@@ -8,13 +8,14 @@ type Props = {
 };
 
 export default function PostButton({ id }: Props) {
+  // 処理後に遷移元にリダイレクトさせる
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   return (
     <div className="flex items-center gap-2">
       <Link
-        href={`/posts/${id}/edit`}
+        href={`/posts/${id}/edit?redirect=${pathname + '?' + searchParams}`}
         className="w-8 h-8 flex items-center justify-center rounded-full bg-sky-50 hover:bg-sky-100 transition"
       >
         ✏️
