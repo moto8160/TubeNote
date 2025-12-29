@@ -27,13 +27,13 @@ export default function TabContainer({ videos, posts,currentUserId }: Props) {
 
   return (
     <>
-      <div className="mb-6">
-        <div className="flex justify-center text-xl gap-6">
+      <div className="mb-4">
+        <div className="flex justify-center text-base sm:text-xl gap-4 sm:gap-6">
           <button
             onClick={() => changeTab('videos')}
-            className={`relative pb-2 px-2 font-medium transition ${
+            className={`relative pb-1 sm:pb-2 px-2 font-medium transition ${
               active === 'videos'
-                ? 'font-medium border-b-3 border-blue-300'
+                ? 'border-b-2 border-blue-300'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -42,9 +42,9 @@ export default function TabContainer({ videos, posts,currentUserId }: Props) {
 
           <button
             onClick={() => changeTab('posts')}
-            className={`relative pb-2 px-2 font-medium transition ${
+            className={`relative pb-1 sm:pb-2 px-2 font-medium transition ${
               active === 'posts'
-                ? 'font-medium border-b-3 border-blue-300'
+                ? 'border-b-2 border-blue-300'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -55,7 +55,7 @@ export default function TabContainer({ videos, posts,currentUserId }: Props) {
 
       {/* コンテンツ */}
       {active === 'videos' ? (
-        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {videos.map((video) => (
             <li key={video.id}>
               <VideoListCard video={video} />
@@ -63,7 +63,7 @@ export default function TabContainer({ videos, posts,currentUserId }: Props) {
           ))}
         </ul>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-3 sm:space-y-4">
           {posts.map((post) => (
             <li key={post.id}>
               <PostListCard post={post} currentUserId={currentUserId} />

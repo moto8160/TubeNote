@@ -12,7 +12,9 @@ export default async function VideosPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <FlashMessage />
-      <p className="text-center text-lg text-gray-700 m-8">みんなの学びを覗いてみよう 📚</p>
+      <p className="text-center text-sm sm:text-lg text-gray-500 m-4 sm:m-8">
+        みんなの学びを覗いてみよう 📚
+      </p>
       <TabContainer videos={videos} posts={posts} currentUserId={currentUserId} />
     </div>
   );
