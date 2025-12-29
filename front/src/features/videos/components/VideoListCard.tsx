@@ -41,9 +41,11 @@ export default function VideoListCard({ video }: Props) {
         <p className="text-sm font-medium line-clamp-2 mb-2">{video.title}</p>
         <p className="text-xs text-gray-600 mb-4">{video.authorName}</p>
 
-        <div className="flex items-center justify-between text-xs text-gray-600 mb-2">
-          <span className="font-medium text-gray-700">{latestPost.user.name}</span>
-          <span>{new Date(latestPost.createdAt).toLocaleDateString('ja-JP')}</span>
+        <div className="flex items-baseline gap-2">
+          <span className="font-semibold text-gray-800">{latestPost.user.name}</span>
+          <span className="text-xs text-gray-400">
+            {new Date(latestPost.updatedAt).toLocaleDateString('ja-JP')}
+          </span>
         </div>
         <PostContent text={latestPost.text} clampHeight="h-28" />
       </div>

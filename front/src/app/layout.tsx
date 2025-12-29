@@ -21,9 +21,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       <head>
         <meta name="color-scheme" content="light only" />
       </head>
-      <body className="bg-white text-gray-900 px-6 sm:px-6 lg:px-0">
+      <body className="bg-white text-gray-900">
         <Header currentUserId={currentUserId} />
-        <main className={`${geistSans.variable}  antialiased`}>{children}</main>
+        <main className={`${geistSans.variable}  antialiased px-6 sm:px-6 lg:px-0`}>{children}</main>
       </body>
     </html>
   );
