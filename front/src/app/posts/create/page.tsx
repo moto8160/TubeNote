@@ -1,12 +1,12 @@
-import PostForm from '@/features/posts/components/PostForm';
+import CreateForm from '@/features/users/components/CreateForm';
 
-export default function PostsPage() {
+export default function CreatePostPage() {
   return (
     <div className="max-w-7xl mx-auto">
       <p className="text-center text-lg text-gray-500 m-8">
         YouTubeを見てノートを残そう ✏️
       </p>
-      <PostForm />
+      <CreateForm />
     </div>
   );
 }

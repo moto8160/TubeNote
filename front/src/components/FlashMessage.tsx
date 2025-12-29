@@ -21,6 +21,12 @@ export default function FlashMessage() {
     case '3':
       message = 'ログアウトしました';
       break;
+    case '4':
+      message = '投稿を削除しました';
+      break;
+    case '5':
+      message = '投稿を更新しました';
+      break;
   }
 
   switch (error) {
