@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { Video } from '@prisma/client';
 import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.type';
@@ -23,24 +23,29 @@ export class VideosService {
     });
   }
 
-  async findOne(videoId: number): Promise<VideoDetailResponse> {
-    const video = await this.prisma.video.findUnique({
+  async findOne(videoId: number, userId: number): Promise<VideoDetailResponse> {
+    const video = await this.prisma.video.findUniqueOrThrow({
       where: { id: videoId },
       include: {
         _count: { select: { posts: true } },
         posts: {
           include: {
             user: { select: { id: true, name: true } },
+            _count: { select: { likes: true } },
+            likes: { where: { userId } },
           },
           orderBy: { updatedAt: 'desc' },
         },
       },
     });
 
-    if (!video) {
-      throw new NotFoundException('video not found');
-    }
-    return video;
+    return {
+      ...video,
+      posts: video.posts.map((post) => ({
+        ...post,
+        isLiked: post.likes.length > 0,
+      })),
+    };
   }
 
   async delete(videoId: number) {

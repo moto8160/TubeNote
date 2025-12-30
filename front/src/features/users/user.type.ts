@@ -1,17 +1,16 @@
-import { Post } from '../posts/post.type';
+import { Like, Post } from '../posts/post.type';
 import { Video } from '../videos/video.type';
 
-export type User = {
+export type MyPostsResponse = {
   id: number;
   name: string;
-  createdAt: string;
-};
-
-export type MyPostsResponse = User & {
   _count: { select: { posts: number } };
   posts: (Post & {
+    _count: { likes: number };
     user: { id: number; name: string };
     video: Video;
+    likes: Like[];
+    isLiked: boolean;
   })[];
 };
 

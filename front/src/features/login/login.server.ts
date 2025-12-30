@@ -37,5 +37,5 @@ export async function logout(): Promise<void> {
 
   cookieStore.delete('token');
 
-  redirect('/videos?success=3');
+  redirect('/?success=3');
 }

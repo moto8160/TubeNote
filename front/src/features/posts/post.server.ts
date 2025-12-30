@@ -1,10 +1,17 @@
 'use server';
 import { fetchWithToken } from '@/utils/fetchWithToken';
-import { CreatePostResult, PostDetailResponse, PostListResponse, UpdatePostResult } from './post.type';
+import {
+  CreatePostResult,
+  PostDetailResponse,
+  PostListResponse,
+  UpdatePostResult,
+} from './post.type';
 import { notFound, redirect } from 'next/navigation';
 
 export async function fetchPosts(): Promise<PostListResponse[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/posts`);
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
+    method: 'GET',
+  });
 
   if (!res.ok) {
     notFound();
@@ -72,4 +79,28 @@ export async function deletePost(formData: FormData): Promise<void | { success: 
   }
 
   redirect(currentPath + '&success=4');
+}
+
+export async function createLike(postId: number): Promise<{ success: boolean }> {
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/likes`, {
+    method: 'POST',
+  });
+
+  if (!res.ok) {
+    return { success: false };
+  }
+
+  return { success: true };
+}
+
+export async function deleteLike(postId: number): Promise<{ success: boolean }> {
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}/likes`, {
+    method: 'DELETE',
+  });
+
+  if (!res.ok) {
+    return { success: false };
+  }
+
+  return { success: true };
 }

@@ -20,9 +20,10 @@ import { PostListResponse, SuccessResponse } from './post.type';
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<PostListResponse[]> {
-    return this.postsService.findAll();
+  async findAll(@Request() req: JwtRequest): Promise<PostListResponse[]> {
+    return this.postsService.findAll(req.user.userId);
   }
 
   @Get(':id')
@@ -33,8 +34,7 @@ export class PostsController {
   @UseGuards(JwtAuthGuard)
   @Post()
   async create(@Body() dto: CreatePostDto, @Request() req: JwtRequest): Promise<SuccessResponse> {
-    const userId = req.user.userId;
-    await this.postsService.create(userId, dto);
+    await this.postsService.create(req.user.userId, dto);
     return { success: true };
   }
 
@@ -45,8 +45,7 @@ export class PostsController {
     @Body() dto: UpdatePostDto,
     @Request() req: JwtRequest,
   ): Promise<SuccessResponse> {
-    const userId = req.user.userId;
-    await this.postsService.update(id, dto, userId);
+    await this.postsService.update(id, dto, req.user.userId);
     return { success: true };
   }
 
@@ -56,8 +55,7 @@ export class PostsController {
     @Param('id', ParseIntPipe) id: number,
     @Request() req: JwtRequest,
   ): Promise<{ success: true }> {
-    const userId = req.user.userId;
-    await this.postsService.delete(id, userId);
+    await this.postsService.delete(id, req.user.userId);
     return { success: true };
   }
 }

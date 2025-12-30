@@ -1,9 +1,11 @@
 import ContactForm from '@/components/ContactForm';
+import FlashMessage from '@/components/FlashMessage';
 import Link from 'next/link';
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
+      <FlashMessage />
       {/* ヒーロー */}
       <section className="max-w-5xl mx-auto px-6 py-28 text-center bg-white">
         <h1 className="text-5xl font-bold text-gray-800 ">

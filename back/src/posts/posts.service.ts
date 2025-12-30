@@ -12,14 +12,21 @@ export class PostsService {
     private readonly videosService: VideosService,
   ) {}
 
-  async findAll(): Promise<PostListResponse[]> {
-    return this.prisma.post.findMany({
+  async findAll(userId: number): Promise<PostListResponse[]> {
+    const posts = await this.prisma.post.findMany({
       orderBy: { updatedAt: 'desc' },
       include: {
+        _count: { select: { likes: true } },
         user: { select: { id: true, name: true } },
         video: true,
+        likes: { where: { userId } },
       },
     });
+
+    return posts.map((post) => ({
+      ...post,
+      isLiked: post.likes.length > 0,
+    }));
   }
 
   async findOne(postId: number): Promise<PostDetailResponse> {

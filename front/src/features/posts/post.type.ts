@@ -9,12 +9,23 @@ export type Post = {
   updatedAt: string;
 };
 
+export type Like = {
+  id: number;
+  postId: number;
+  userId: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type PostListResponse = Post & {
+  _count: { likes: number };
   user: {
     id: number;
     name: string;
   };
   video: Video;
+  likes: Like[];
+  isLiked: boolean;
 };
 
 export type PostDetailResponse = Post & {

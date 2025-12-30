@@ -1,19 +1,17 @@
-import { Prisma } from '@prisma/client';
+import { Like, Video } from '@prisma/client';
 
-export type MyPostsResponse = Prisma.UserGetPayload<{
-  select: {
-    id: true;
-    name: true;
-    createdAt: true;
-    _count: { select: { posts: true } };
-    posts: {
-      include: {
-        user: { select: { id: true; name: true } };
-        video: true;
-      };
-    };
-  };
-}>;
+export type MyPostsResponse = {
+  id: number;
+  name: string;
+  _count: { posts: number };
+  posts: {
+    _count: { likes: number };
+    user: { id: number; name: string };
+    video: Video;
+    likes: Like[];
+    isLiked: boolean;
+  }[];
+};
 
 export type MyPageResponse = {
   user: {

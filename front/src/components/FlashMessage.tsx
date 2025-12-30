@@ -31,7 +31,7 @@ export default function FlashMessage() {
 
   switch (error) {
     case '1':
-      message = 'ログインしてください';
+      message = 'ログインが必要です';
       break;
   }
 
