@@ -1,6 +1,17 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseIntPipe,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.dto';
+import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.type';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import type { JwtRequest } from 'src/auth/auth.type';
 
 @Controller('videos')
 export class VideosController {
@@ -11,9 +22,13 @@ export class VideosController {
     return this.videosService.findAll();
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<VideoDetailResponse> {
-    return this.videosService.findOne(id);
+  async findOne(
+    @Param('id', ParseIntPipe) id: number,
+    @Request() req: JwtRequest,
+  ): Promise<VideoDetailResponse> {
+    return this.videosService.findOne(id, req.user.userId);
   }
 
   @Post('/preview')

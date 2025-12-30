@@ -4,7 +4,7 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
   const path = req.nextUrl.pathname;
 
-  const publicPaths = ['/', '/videos', '/login', '/users/create'];
+  const publicPaths = ['/', '/login', '/users/create'];
 
   // 未ログイン
   if (!token) {

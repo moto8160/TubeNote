@@ -1,6 +1,7 @@
 'use server';
 import { notFound } from 'next/navigation';
 import { fetchOEmbedResult, VideoDetailResponse, VideoListResponse } from '../videos/video.type';
+import { fetchWithToken } from '@/utils/fetchWithToken';
 
 export async function fetchVideos(): Promise<VideoListResponse[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos`);
@@ -13,7 +14,9 @@ export async function fetchVideos(): Promise<VideoListResponse[]> {
 }
 
 export async function fetchVideoDetail(videoId: string): Promise<VideoDetailResponse> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos/${videoId}`);
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/videos/${videoId}`, {
+    method: 'GET',
+  });
   const json = await res.json();
 
   if (!res.ok) {

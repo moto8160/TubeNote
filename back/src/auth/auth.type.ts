@@ -13,3 +13,7 @@ export type RequestUser = {
 export type JwtRequest = {
   user: RequestUser;
 };
+
+export type SignInResponse = {
+  access_token: string;
+};

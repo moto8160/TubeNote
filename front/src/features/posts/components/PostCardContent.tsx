@@ -1,3 +1,4 @@
+import LikeButton from './LikeButton';
 import PostButton from './PostButton';
 
 type Props = {
@@ -7,6 +8,8 @@ type Props = {
   userId: number;
   username: string;
   currentUserId: number | null;
+  isLiked: boolean;
+  likeCount: number;
 };
 
 export default function PostCardContent({
@@ -16,6 +19,8 @@ export default function PostCardContent({
   userId,
   username,
   currentUserId,
+  isLiked,
+  likeCount,
 }: Props) {
   return (
     <>
@@ -36,6 +41,11 @@ export default function PostCardContent({
       <p className="leading-relaxed mb-6 whitespace-pre-wrap wrap-break-word text-gray-700">
         {text}
       </p>
+
+      {/* いいね */}
+      <div className="flex items-center justify-between my-2">
+        <LikeButton postId={id} isLiked={isLiked} likeCount={likeCount} />
+      </div>
     </>
   );
 }

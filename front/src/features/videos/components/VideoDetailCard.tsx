@@ -43,27 +43,14 @@ export default function VideoDetailCard({ video, currentUserId }: Props) {
                   userId={post.user.id}
                   username={post.user.name}
                   currentUserId={currentUserId}
+                  isLiked={post.isLiked}
+                  likeCount={post._count.likes}
                 />
               </div>
             </li>
           ))}
         </ul>
       </div>
-
-      {/* <ul className="space-y-2">
-        {video.posts.map((post) => (
-          <li key={post.id} className="bg-white rounded-xl shadow-sm p-6">
-            <div className="flex items-center justify-between">
-              <span className="font-medium mb-2">{post.user.name}</span>
-              <span className="text-xs text-gray-400">
-                {new Date(post.createdAt).toLocaleDateString('ja-JP')}
-              </span>
-            </div>
-
-            <p className="whitespace-pre-wrap leading-loose wrap-break-word">{post.text}</p>
-          </li>
-        ))}
-      </ul> */}
     </>
   );
 }

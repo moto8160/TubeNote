@@ -13,7 +13,7 @@ type Props = {
   currentUserId: number | null;
 };
 
-export default function TabContainer({ videos, posts,currentUserId }: Props) {
+export default function TabContainer({ videos, posts, currentUserId }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 

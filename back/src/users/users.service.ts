@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto, MyPageResponse, MyPostsResponse } from './user.dto';
+import { CreateUserDto } from './user.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
+import { MyPageResponse, MyPostsResponse } from './user.type';
 
 @Injectable()
 export class UsersService {
@@ -14,19 +15,26 @@ export class UsersService {
       select: {
         id: true,
         name: true,
-        createdAt: true,
         _count: { select: { posts: true } },
         posts: {
           orderBy: { updatedAt: 'desc' },
           include: {
+            _count: { select: { likes: true } },
             user: { select: { id: true, name: true } },
             video: true,
+            likes: { where: { userId } },
           },
         },
       },
     });
 
-    return user;
+    return {
+      ...user,
+      posts: user.posts.map((post) => ({
+        ...post,
+        isLiked: post.likes.length > 0,
+      })),
+    };
   }
 
   async getMayPage(userId: number): Promise<MyPageResponse> {

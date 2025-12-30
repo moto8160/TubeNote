@@ -10,7 +10,7 @@ type Props = {
 
 export default function PostListCard({ post, currentUserId }: Props) {
   return (
-    <div className="bg-white border border-sky-50 rounded-2xl p-6 shadow-sm">
+    <div className="bg-white border border-sky-50 rounded-2xl py-4 px-6 shadow-sm">
       <PostCardContent
         id={post.id}
         text={post.text}
@@ -18,9 +18,10 @@ export default function PostListCard({ post, currentUserId }: Props) {
         userId={post.user.id}
         username={post.user.name}
         currentUserId={currentUserId}
+        isLiked={post.isLiked}
+        likeCount={post._count.likes}
       />
 
-      {/* フッター */}
       <Link
         href={`/videos/${post.video.id}`}
         className="flex items-start gap-4 p-3 rounded-xl border border-transparent hover:border-gray-100 transition"

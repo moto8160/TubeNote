@@ -1,8 +1,9 @@
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { CreateUserDto, MyPageResponse, MyPostsResponse, SuccessResponse } from './user.dto';
+import { CreateUserDto } from './user.dto';
 import type { JwtRequest } from 'src/auth/auth.type';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { MyPageResponse, MyPostsResponse, SuccessResponse } from './user.type';
 
 @Controller('users')
 export class UsersController {

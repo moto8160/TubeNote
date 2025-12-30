@@ -1,17 +1,16 @@
-import { Like, Post } from '../posts/post.type';
-import { Video } from '../videos/video.type';
+import { Like, Video } from '@prisma/client';
 
 export type MyPostsResponse = {
   id: number;
   name: string;
-  _count: { select: { posts: number } };
-  posts: (Post & {
+  _count: { posts: number };
+  posts: {
     _count: { likes: number };
     user: { id: number; name: string };
     video: Video;
     likes: Like[];
     isLiked: boolean;
-  })[];
+  }[];
 };
 
 export type MyPageResponse = {
@@ -19,10 +18,12 @@ export type MyPageResponse = {
     id: number;
     name: string;
     email: string;
-    createdAt: string;
+    createdAt: Date;
   };
   postCount: number;
   videoCount: number;
 };
 
-export type CreateUserResult = { success: true } | { success: false; message: string };
+export type SuccessResponse = {
+  success: true;
+};
