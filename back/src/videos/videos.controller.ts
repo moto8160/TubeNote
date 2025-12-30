@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Post } from '@nestjs/common';
 import { VideosService } from './videos.service';
-import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.dto';
+import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.type';
 
 @Controller('videos')
 export class VideosController {

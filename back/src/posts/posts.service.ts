@@ -1,8 +1,9 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreatePostDto, PostDetailResponse, PostListResponse, UpdatePostDto } from './post.dto';
+import { CreatePostDto, UpdatePostDto } from './post.dto';
 import { VideosService } from 'src/videos/videos.service';
 import { Post } from '@prisma/client';
+import { PostDetailResponse, PostListResponse } from './post.type';
 
 @Injectable()
 export class PostsService {

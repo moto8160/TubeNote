@@ -22,10 +22,10 @@ export type VideoDetailResponse = Prisma.VideoGetPayload<{
   };
 }>;
 
-export class YoutubeOEmbedResponse {
+export type YoutubeOEmbedResponse = {
   html: string;
   title: string;
   authorName: string;
   authorUrl: string;
   thumbnailUrl: string;
-}
+};

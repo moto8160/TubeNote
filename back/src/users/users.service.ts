@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto, MyPageResponse, MyPostsResponse } from './user.dto';
+import { CreateUserDto } from './user.dto';
 import * as bcrypt from 'bcrypt';
 import { User } from '@prisma/client';
+import { MyPageResponse, MyPostsResponse } from './user.type';
 
 @Injectable()
 export class UsersService {

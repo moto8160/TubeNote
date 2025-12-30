@@ -12,7 +12,3 @@ export class SignInDto {
   @IsBoolean()
   remember: boolean;
 }
-
-export class SignInResponse {
-  access_token: string;
-}

@@ -1,4 +1,3 @@
-import { Prisma } from '@prisma/client';
 import { IsString, IsNotEmpty, IsEmail, MinLength } from 'class-validator';
 
 export class CreateUserDto {
@@ -15,33 +14,3 @@ export class CreateUserDto {
 
   passwordConfirm: string;
 }
-
-export class SuccessResponse {
-  success: true;
-}
-
-export type MyPostsResponse = Prisma.UserGetPayload<{
-  select: {
-    id: true;
-    name: true;
-    createdAt: true;
-    _count: { select: { posts: true } };
-    posts: {
-      include: {
-        user: { select: { id: true; name: true } };
-        video: true;
-      };
-    };
-  };
-}>;
-
-export type MyPageResponse = {
-  user: {
-    id: number;
-    name: string;
-    email: string;
-    createdAt: Date;
-  };
-  postCount: number;
-  videoCount: number;
-};

@@ -11,9 +11,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
-import { CreatePostDto, PostListResponse, SuccessResponse, UpdatePostDto } from './post.dto';
+import { CreatePostDto, UpdatePostDto } from './post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import type { JwtRequest } from 'src/auth/auth.type';
+import { PostListResponse, SuccessResponse } from './post.type';
 
 @Controller('posts')
 export class PostsController {

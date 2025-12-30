@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { Video } from '@prisma/client';
-import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.dto';
+import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.type';
 
 @Injectable()
 export class VideosService {
