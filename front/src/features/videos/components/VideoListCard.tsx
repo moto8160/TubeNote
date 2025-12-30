@@ -20,7 +20,7 @@ export default function VideoListCard({ video }: Props) {
               hover:shadow-md hover:-translate-y-1 transition"
     >
       {/* 動画 */}
-      <div className="aspect-video relative">
+      <div className="aspect-video relative overflow-hidden rounded-t-xl">
         <Image
           src={video.thumbnailUrl}
           alt={video.title}

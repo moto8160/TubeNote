@@ -3,7 +3,7 @@ import LoginForm from '@/features/login/components/LoginForm';
 
 export default function LoginPage() {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen min-w-screen">
       <FlashMessage />
       <LoginForm />
     </div>

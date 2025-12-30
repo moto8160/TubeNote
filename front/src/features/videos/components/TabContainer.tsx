@@ -31,9 +31,9 @@ export default function TabContainer({ videos, posts, currentUserId }: Props) {
         <div className="flex justify-center text-base sm:text-xl gap-4 sm:gap-6">
           <button
             onClick={() => changeTab('videos')}
-            className={`relative pb-1 sm:pb-2 px-2 font-medium transition ${
+            className={`relative mb-1 pb-1 sm:pb-2 px-2 font-medium transition ${
               active === 'videos'
-                ? 'border-b-2 border-blue-300'
+                ? 'border-b-3 border-blue-300'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
@@ -42,9 +42,9 @@ export default function TabContainer({ videos, posts, currentUserId }: Props) {
 
           <button
             onClick={() => changeTab('posts')}
-            className={`relative pb-1 sm:pb-2 px-2 font-medium transition ${
+            className={`relative mb-1 pb-1 sm:pb-2 px-2 font-medium transition ${
               active === 'posts'
-                ? 'border-b-2 border-blue-300'
+                ? 'border-b-3 border-blue-300'
                 : 'text-gray-500 hover:text-gray-700'
             }`}
           >
