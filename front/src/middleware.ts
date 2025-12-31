@@ -4,13 +4,13 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
   const path = req.nextUrl.pathname;
 
-  const publicPaths = ['/', '/login', '/users/create'];
+  const publicPaths = ['/','/auth', '/login', '/users/create'];
 
   // 未ログイン
   if (!token) {
-    if (!publicPaths.includes(path)) {
-      return NextResponse.redirect(new URL('/login?error=1', req.url));
-    }
+    // if (!publicPaths.includes(path)) {
+    //   return NextResponse.redirect(new URL('/login?error=1', req.url));
+    // }
   }
 
   return NextResponse.next();

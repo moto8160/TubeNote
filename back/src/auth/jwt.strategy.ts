@@ -8,7 +8,8 @@ import { JwtPayload, RequestUser } from './auth.type';
 
 @Injectable()
 // JWT検証を継承元で行う
-export class JwtStrategy extends PassportStrategy(Strategy) {
+// PassportStrategy(Strategy, 'Strategy名')
+export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor() {
     // パラメータ設定
     super({

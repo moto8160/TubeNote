@@ -39,3 +39,21 @@ export async function logout(): Promise<void> {
 
   redirect('/?success=3');
 }
+
+export async function googleLogin(): Promise<LoginResult> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/google/callback`);
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { success: false, message: json.message ?? 'エラーが発生しました。' };
+  }
+
+  console.log(res);
+
+  const cookieStore = await cookies();
+  cookieStore.set('token', json.access_token, {
+    httpOnly: true,
+  });
+
+  return { success: true };
+}

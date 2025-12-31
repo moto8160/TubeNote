@@ -1,8 +1,9 @@
 'use client';
-import { login } from '@/features/login/login.server';
+import { googleLogin, login } from '@/features/login/login.server';
 import { useState } from 'react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -69,19 +70,25 @@ export default function LoginForm() {
           <button className="w-full bg-sky-500 text-white py-2 px-4 rounded-md shadow hover:bg-sky-600 transition">
             ログイン
           </button>
-
-          <div className="mt-8 text-sm text-gray-700">
-            <p className="flex justify-center gap-1">
-              アカウントがない方は
-              <Link
-                href="/users/create"
-                className="text-sky-600 font-medium hover:underline hover:text-sky-700 transition"
-              >
-                こちら
-              </Link>
-            </p>
-          </div>
         </form>
+
+        <div className="mt-8 text-sm text-gray-700">
+          <p className="flex justify-center gap-1">
+            アカウントがない方は
+            <Link
+              href="/users/create"
+              className="text-sky-600 font-medium hover:underline hover:text-sky-700 transition"
+            >
+              こちら
+            </Link>
+          </p>
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
+            <Image src="/google_login.svg" alt="Google Login" width={180} height={40} />
+          </Link>
+        </div>
       </div>
     </div>
   );

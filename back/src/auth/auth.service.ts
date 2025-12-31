@@ -20,7 +20,7 @@ export class AuthService {
       throw new NotFoundException('メールアドレスが登録されていません');
     }
 
-    const isMatch = await bcrypt.compare(dto.password, user.password);
+    const isMatch = await bcrypt.compare(dto.password, user.password!);
 
     if (!isMatch) {
       throw new UnauthorizedException('パスワードが正しくありません');
@@ -34,6 +34,21 @@ export class AuthService {
 
     return {
       access_token: await this.jwtService.signAsync(payload, { expiresIn }),
+    };
+  }
+
+  async googleSignIn(profileId: string, username: string, email: string) {
+    let user = await this.usersService.findUserByEmail(email);
+
+    //初回ログイン時はユーザー登録
+    if (!user) {
+      user = await this.usersService.createGoogleUser(profileId, username, email);
+    }
+
+    const payload = { sub: user.id, email: user.email, username: user.name };
+
+    return {
+      access_token: await this.jwtService.signAsync(payload),
     };
   }
 }
