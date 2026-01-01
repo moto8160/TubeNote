@@ -55,7 +55,8 @@ export class PostsService {
     });
   }
 
-  async delete(postId: number, userId: number) {
+  async delete(postId: number, userId: number): Promise<{ videoDeleted: boolean }> {
+    let videoDeleted = false;
     const post = await this.checkOwnPost(postId, userId);
     await this.prisma.post.delete({
       where: { id: postId },
@@ -65,7 +66,10 @@ export class PostsService {
     const postCount = await this.countPostByVideoId(post.videoId);
     if (postCount === 0) {
       await this.videosService.delete(post.videoId);
+      videoDeleted = true;
     }
+
+    return { videoDeleted };
   }
 
   async checkOwnPost(postId: number, userId: number): Promise<Post> {

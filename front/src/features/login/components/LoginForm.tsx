@@ -3,11 +3,13 @@ import { login } from '@/features/login/login.server';
 import { useState } from 'react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [remember, setRemember] = useState(false); //UI上はtrue/false
 
   return (
     <div className="flex flex-col items-center pt-12 px-4">
@@ -59,29 +61,50 @@ export default function LoginForm() {
               <input
                 type="checkbox"
                 name="remember"
-                defaultChecked
+                checked={remember}
+                onChange={(e) => {
+                  const value = e.target.checked;
+                  setRemember(value);
+                  // OAuth用にクッキーに保存
+                  document.cookie = `remember=${value ? 'true' : 'false'}`;
+                }}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded"
               />
-              <label className="ml-2 block text-sm text-gray-900">ログイン状態を保持</label>
+              <label className="ml-2 block text-sm text-gray-900">
+                ログイン状態を保持（全てのログイン方法に適用）
+              </label>
             </div>
           </div>
 
           <button className="w-full bg-sky-500 text-white py-2 px-4 rounded-md shadow hover:bg-sky-600 transition">
             ログイン
           </button>
-
-          <div className="mt-8 text-sm text-gray-700">
-            <p className="flex justify-center gap-1">
-              アカウントがない方は
-              <Link
-                href="/users/create"
-                className="text-sky-600 font-medium hover:underline hover:text-sky-700 transition"
-              >
-                こちら
-              </Link>
-            </p>
-          </div>
         </form>
+
+        <div className="mt-8 text-sm text-gray-700">
+          <p className="flex justify-center gap-1">
+            アカウントがない方は
+            <Link
+              href="/users/create"
+              className="text-sky-600 font-medium hover:underline hover:text-sky-700 transition"
+            >
+              こちら
+            </Link>
+          </p>
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
+            <Image
+              src="/google_login.svg"
+              alt="Google Login"
+              width={180}
+              height={40}
+              loading="eager"
+              className="transition-transform hover:scale-105"
+            />
+          </Link>
+        </div>
       </div>
     </div>
   );

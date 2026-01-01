@@ -24,9 +24,8 @@ export async function login(formData: FormData): Promise<LoginResult> {
   // cookieにJWTを設定(name, value, options)
   cookieStore.set('token', json.access_token, {
     httpOnly: true,
-    // チェックあり→30日（バックと同じ）
-    // チェックなし→セッションcookie（ブラウザ閉じたら消える）
-    maxAge: remember ? 60 * 60 * 24 * 30 : undefined,
+    // JWTの有効期限と同じ
+    maxAge: remember ? 60 * 60 * 24 * 30 : 60 * 60 * 24,
   });
 
   return { success: true };
@@ -35,6 +34,7 @@ export async function login(formData: FormData): Promise<LoginResult> {
 export async function logout(): Promise<void> {
   const cookieStore = await cookies();
 
+  cookieStore.delete('remember');
   cookieStore.delete('token');
 
   redirect('/?success=3');

@@ -17,3 +17,13 @@ export type JwtRequest = {
 export type SignInResponse = {
   access_token: string;
 };
+
+export type GoogleUser = {
+  profileId: string;
+  username: string;
+  email: string;
+};
+
+export type GoogleRequest = {
+  user: GoogleUser;
+};

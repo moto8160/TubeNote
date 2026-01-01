@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { CreateUserDto } from './user.dto';
 import * as bcrypt from 'bcrypt';
-import { User } from '@prisma/client';
+import { Provider, User } from '@prisma/client';
 import { MyPageResponse, MyPostsResponse } from './user.type';
 
 @Injectable()
@@ -81,6 +81,17 @@ export class UsersService {
 
     await this.prisma.user.create({
       data: { name, email, password: hash },
+    });
+  }
+
+  async createGoogleUser(profileId: string, name: string, email: string): Promise<User> {
+    return this.prisma.user.create({
+      data: {
+        provider: Provider.google,
+        providerId: profileId,
+        name,
+        email,
+      },
     });
   }
 }

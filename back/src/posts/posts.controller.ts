@@ -14,7 +14,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto, UpdatePostDto } from './post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import type { JwtRequest } from 'src/auth/auth.type';
-import { PostListResponse, SuccessResponse } from './post.type';
+import { PostDeleteResponse, PostListResponse, SuccessResponse } from './post.type';
 
 @Controller('posts')
 export class PostsController {
@@ -54,8 +54,8 @@ export class PostsController {
   async delete(
     @Param('id', ParseIntPipe) id: number,
     @Request() req: JwtRequest,
-  ): Promise<{ success: true }> {
-    await this.postsService.delete(id, req.user.userId);
-    return { success: true };
+  ): Promise<PostDeleteResponse> {
+    const { videoDeleted } = await this.postsService.delete(id, req.user.userId); //分割代入
+    return { success: true, videoDeleted };
   }
 }

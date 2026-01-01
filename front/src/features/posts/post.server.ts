@@ -74,11 +74,18 @@ export async function deletePost(formData: FormData): Promise<void | { success: 
     method: 'DELETE',
   });
 
+  const json = await res.json();
+
   if (!res.ok) {
     return { success: false };
   }
 
-  redirect(currentPath + '&success=4');
+  // 詳細画面から削除時の404回避
+  if (json.videoDeleted) {
+    redirect('/videos?success=4');
+  } else {
+    redirect(currentPath + '&success=4');
+  }
 }
 
 export async function createLike(postId: number): Promise<{ success: boolean }> {

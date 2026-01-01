@@ -4,7 +4,7 @@ export function middleware(req: NextRequest) {
   const token = req.cookies.get('token')?.value;
   const path = req.nextUrl.pathname;
 
-  const publicPaths = ['/', '/login', '/users/create'];
+  const publicPaths = ['/','/auth', '/login', '/users/create'];
 
   // 未ログイン
   if (!token) {
@@ -17,5 +17,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|.well-known).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|.well-known|.*\\.svg).*)'],
 };
