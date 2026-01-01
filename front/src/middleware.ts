@@ -8,14 +8,14 @@ export function middleware(req: NextRequest) {
 
   // 未ログイン
   if (!token) {
-    // if (!publicPaths.includes(path)) {
-    //   return NextResponse.redirect(new URL('/login?error=1', req.url));
-    // }
+    if (!publicPaths.includes(path)) {
+      return NextResponse.redirect(new URL('/login?error=1', req.url));
+    }
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|.well-known).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|api|.well-known|.*\\.svg).*)'],
 };

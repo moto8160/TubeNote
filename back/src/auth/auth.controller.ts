@@ -30,6 +30,6 @@ export class AuthController {
       req.user.username,
       req.user.email,
     );
-    res.redirect(`http://localhost:3000/login/google?token=${response.access_token}`);
+    res.redirect(`${process.env.GOOGLE_FRONT_URL}?token=${response.access_token}`);
   }
 }

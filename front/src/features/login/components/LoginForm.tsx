@@ -95,7 +95,14 @@ export default function LoginForm() {
 
         <div className="flex justify-center mt-6">
           <Link href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
-            <Image src="/google_login.svg" alt="Google Login" width={180} height={40} />
+            <Image
+              src="/google_login.svg"
+              alt="Google Login"
+              width={180}
+              height={40}
+              loading="eager"
+              className="transition-transform hover:scale-105"
+            />
           </Link>
         </div>
       </div>
