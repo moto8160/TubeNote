@@ -1,5 +1,5 @@
 'use client';
-import { googleLogin, login } from '@/features/login/login.server';
+import { login } from '@/features/login/login.server';
 import { useState } from 'react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -9,6 +9,7 @@ export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
+  const [remember, setRemember] = useState(false); //UI上はtrue/false
 
   return (
     <div className="flex flex-col items-center pt-12 px-4">
@@ -60,10 +61,18 @@ export default function LoginForm() {
               <input
                 type="checkbox"
                 name="remember"
-                defaultChecked
+                checked={remember}
+                onChange={(e) => {
+                  const value = e.target.checked;
+                  setRemember(value);
+                  // OAuth用にクッキーに保存
+                  document.cookie = `remember=${value ? 'true' : 'false'}`;
+                }}
                 className="h-4 w-4 text-blue-600 border-gray-300 rounded"
               />
-              <label className="ml-2 block text-sm text-gray-900">ログイン状態を保持</label>
+              <label className="ml-2 block text-sm text-gray-900">
+                ログイン状態を保持（全てのログイン方法に適用）
+              </label>
             </div>
           </div>
 

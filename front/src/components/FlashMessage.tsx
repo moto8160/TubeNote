@@ -33,6 +33,9 @@ export default function FlashMessage() {
     case '1':
       message = 'ログインが必要です';
       break;
+    case '2':
+      message = 'ログインに失敗しました';
+      break;
   }
 
   return (
