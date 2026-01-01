@@ -20,3 +20,8 @@ export type PostDetailResponse = Prisma.PostGetPayload<{
 export type SuccessResponse = {
   success: true;
 };
+
+export type PostDeleteResponse = {
+  success: true;
+  videoDeleted: boolean;
+};
