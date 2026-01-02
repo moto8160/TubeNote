@@ -1,6 +1,8 @@
 import { Like, Post } from '../posts/post.type';
 import { Video } from '../videos/video.type';
 
+type Provider = 'local' | 'google' | 'github';
+
 export type MyPostsResponse = {
   id: number;
   name: string;
@@ -19,6 +21,7 @@ export type MyPageResponse = {
     id: number;
     name: string;
     email: string;
+    provider: Provider;
     createdAt: string;
   };
   postCount: number;

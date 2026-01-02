@@ -23,6 +23,34 @@ export async function createUser(formData: FormData): Promise<CreateUserResult> 
   return json;
 }
 
+
+//ここのバックから作成
+export async function updateUser(formData: FormData): Promise<> {
+  const isLocal = formData.get('isLocal') === 'true';
+  const name = formData.get('name');
+  const email = formData.get('email');
+  const password = formData.get('password');
+  const passwordConfirm = formData.get('passwordConfirm');
+
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/edit`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name,
+      email: isLocal ? email : undefined,
+      password: isLocal ? password : undefined,
+      passwordConfirm: isLocal ? passwordConfirm : undefined,
+    }),
+  });
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { success: false, message: json.message ?? 'エラーが発生しました。' };
+  }
+
+  return json;
+}
+
 export async function fetchMyPosts(): Promise<MyPostsResponse> {
   const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/me`);
 

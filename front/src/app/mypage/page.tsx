@@ -1,8 +1,10 @@
 import { logout } from '@/features/login/login.server';
 import { fetchMyPage } from '@/features/users/user.server';
+import Link from 'next/link';
 
 export default async function MyPage() {
   const data = await fetchMyPage();
+  const isGuest = data.user.email === 'guest@example.com';
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10">
@@ -18,6 +20,10 @@ export default async function MyPage() {
           <p>
             <span className="font-medium text-gray-700">メール： </span>
             {data.user.email}
+          </p>
+          <p>
+            <span className="font-medium text-gray-700">ログイン： </span>
+            {data.user.provider === 'local' ? 'つべのーと' : data.user.provider}
           </p>
           <p>
             <span className="font-medium text-gray-700">登録日： </span>
@@ -45,7 +51,7 @@ export default async function MyPage() {
 
       {/* ボタン */}
       <div className="flex flex-col gap-4">
-        <a
+        <Link
           href="/users/me"
           className="
             w-full text-center py-3 rounded-xl font-medium
@@ -54,19 +60,30 @@ export default async function MyPage() {
           "
         >
           自分の投稿を見る
-        </a>
+        </Link>
 
-        <a
-          href="#"
-          className="
+        {isGuest ? (
+          <div
+            className="
             w-full text-center py-3 rounded-xl font-medium 
             bg-gray-100 text-gray-700
             hover:bg-gray-200 transition
           "
-        >
-          プロフィールを編集する(準備中)
-        </a>
-
+          >
+            プロフィールを編集する(ゲストログイン時は不可)
+          </div>
+        ) : (
+          <Link
+            href="/users/edit"
+            className="
+            w-full text-center py-3 rounded-xl font-medium 
+            bg-gray-100 text-gray-700
+            hover:bg-gray-200 transition
+          "
+          >
+            プロフィールを編集する
+          </Link>
+        )}
         <button
           onClick={logout}
           className="

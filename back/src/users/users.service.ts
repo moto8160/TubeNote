@@ -40,7 +40,7 @@ export class UsersService {
   async getMayPage(userId: number): Promise<MyPageResponse> {
     const user = await this.prisma.user.findUniqueOrThrow({
       where: { id: userId },
-      select: { id: true, name: true, email: true, createdAt: true },
+      select: { id: true, name: true, email: true, provider: true, createdAt: true },
     });
 
     const postCount = await this.prisma.post.count({
