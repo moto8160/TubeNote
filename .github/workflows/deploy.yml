@@ -28,6 +28,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.USER }}@${{ secrets.HOST }} << 'EOF'
 
           cd ~/TubeNote
+          git reset --hard HEAD
           git pull
 
           #フロントのビルド
