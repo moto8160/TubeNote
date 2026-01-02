@@ -21,9 +21,19 @@ export type SignInResponse = {
 export type GoogleUser = {
   profileId: string;
   username: string;
-  email: string;
+  email: string | null;
 };
 
 export type GoogleRequest = {
   user: GoogleUser;
+};
+
+export type GitHubUser = {
+  profileId: string;
+  username: string | null;
+  email: string | null;
+};
+
+export type GitHubRequest = {
+  user: GitHubUser;
 };

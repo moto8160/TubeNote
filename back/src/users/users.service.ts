@@ -63,6 +63,12 @@ export class UsersService {
     });
   }
 
+  async findUserByProvider(provider: Provider, providerId: string): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where: { provider, providerId },
+    });
+  }
+
   async createUser(dto: CreateUserDto) {
     const { name, email, password, passwordConfirm } = dto;
 
@@ -84,13 +90,22 @@ export class UsersService {
     });
   }
 
-  async createGoogleUser(profileId: string, name: string, email: string): Promise<User> {
+  async createOAuthUser(
+    provider: Provider,
+    profileId: string,
+    username: string | null,
+    email: string | null,
+  ): Promise<User> {
+    const dummyEmail =
+      provider === Provider.google
+        ? `google_${profileId}@example.com`
+        : `github_${profileId}@example.com`;
     return this.prisma.user.create({
       data: {
-        provider: Provider.google,
+        provider,
         providerId: profileId,
-        name,
-        email,
+        name: username || '未設定', //null,undefined(??)に加えて、""の時も
+        email: email || dummyEmail, //ユニーク制約あるため
       },
     });
   }

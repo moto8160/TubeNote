@@ -3,7 +3,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Profile, Strategy } from 'passport-google-oauth20';
 import { GoogleUser } from './auth.type';
 
-// npm公式ドキュメント（https://www.npmjs.com/package/passport-google-oauth20）
+// passport-google-oauth20（https://www.npmjs.com/package/passport-google-oauth20）
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
@@ -23,7 +23,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     return {
       profileId: profile.id,
       username: profile.displayName,
-      email: profile.emails![0].value,
+      email: profile.emails?.[0]?.value ?? null,
     };
   }
 }

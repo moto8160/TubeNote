@@ -18,6 +18,7 @@ datasource db {
 enum Provider {
   local
   google
+  github
 }
 
 model User {
