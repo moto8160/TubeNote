@@ -38,6 +38,15 @@ export class AuthService {
     };
   }
 
+  async guestSignIn() {
+    const guestEmail = 'guest@example.com';
+    const user = await this.usersService.findUserByEmail(guestEmail);
+    const payload = { sub: user!.id, email: user!.email, username: user!.name };
+    return {
+      access_token: await this.jwtService.signAsync(payload),
+    };
+  }
+
   async OAuthSignIn(
     provider: Provider,
     profileId: string,

@@ -31,6 +31,23 @@ export async function login(formData: FormData): Promise<LoginResult> {
   return { success: true };
 }
 
+export async function guestLogin() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/guest`);
+  const json = await res.json();
+
+  if (!res.ok) {
+    return { success: false, message: 'エラーが発生しました。' };
+  }
+
+  const cookieStore = await cookies();
+  cookieStore.set('token', json.access_token, {
+    httpOnly: true,
+    maxAge: undefined,
+  });
+
+  return { success: true };
+}
+
 export async function logout(): Promise<void> {
   const cookieStore = await cookies();
 

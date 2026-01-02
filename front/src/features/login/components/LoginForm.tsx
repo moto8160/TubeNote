@@ -1,5 +1,5 @@
 'use client';
-import { login } from '@/features/login/login.server';
+import { guestLogin, login } from '@/features/login/login.server';
 import { useState } from 'react';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
@@ -115,6 +115,23 @@ export default function LoginForm() {
             />
           </Link>
         </div>
+
+        <form
+          action={async () => {
+            const result = await guestLogin();
+
+            if (!result.success) {
+              setMessage(result.message ?? 'ログインに失敗しました');
+              return;
+            }
+
+            redirect('/videos?success=1');
+          }}
+        >
+          <button className="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-md shadow  mt-8 text-sm font-medium hover:bg-gray-200 transition">
+            👤 ゲストログイン（投稿も自由に試せます）
+          </button>
+        </form>
       </div>
     </div>
   );

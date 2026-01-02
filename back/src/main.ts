@@ -6,7 +6,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
   app.enableCors({
-    origin: true, // フロントURLだけにすべき
+    origin: ['http://localhost:3000', 'https://tubenote.jp'],
     credentials: true,
   });
 

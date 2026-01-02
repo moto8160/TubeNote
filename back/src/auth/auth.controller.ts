@@ -15,6 +15,11 @@ export class AuthController {
     return this.authService.signIn(dto);
   }
 
+  @Get('guest')
+  async guestSignIn() {
+    return this.authService.guestSignIn();
+  }
+
   // PassportがGoogle画面にリダイレクト
   // ログイン後はコールバックに指定したURLにリダイレクト
   @UseGuards(AuthGuard('google'))
