@@ -1,9 +1,10 @@
 import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInDto } from './auth.dto';
-import type { GoogleRequest, SignInResponse } from './auth.type';
+import type { GitHubRequest, GoogleRequest, SignInResponse } from './auth.type';
 import { AuthGuard } from '@nestjs/passport';
 import type { Response } from 'express';
+import { Provider } from '@prisma/client';
 
 @Controller('auth')
 export class AuthController {
@@ -25,11 +26,28 @@ export class AuthController {
   @UseGuards(AuthGuard('google'))
   @Get('google/callback')
   async googleRedirect(@Req() req: GoogleRequest, @Res() res: Response) {
-    const response = await this.authService.googleSignIn(
+    const response = await this.authService.OAuthSignIn(
+      Provider.google,
       req.user.profileId,
       req.user.username,
       req.user.email,
     );
     res.redirect(`${process.env.GOOGLE_FRONT_URL}?token=${response.access_token}`);
+  }
+
+  @UseGuards(AuthGuard('github'))
+  @Get('github')
+  githubAuth() {}
+
+  @UseGuards(AuthGuard('github'))
+  @Get('github/callback')
+  async githubRedirect(@Req() req: GitHubRequest, @Res() res: Response) {
+    const response = await this.authService.OAuthSignIn(
+      Provider.github,
+      req.user.profileId,
+      req.user.username,
+      req.user.email,
+    );
+    res.redirect(`${process.env.GITHUB_FRONT_URL}?token=${response.access_token}`);
   }
 }

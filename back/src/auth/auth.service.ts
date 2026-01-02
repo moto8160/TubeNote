@@ -4,6 +4,7 @@ import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { SignInDto } from './auth.dto';
 import { SignInResponse } from './auth.type';
+import { Provider } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -37,12 +38,17 @@ export class AuthService {
     };
   }
 
-  async googleSignIn(profileId: string, username: string, email: string) {
-    let user = await this.usersService.findUserByEmail(email);
+  async OAuthSignIn(
+    provider: Provider,
+    profileId: string,
+    username: string | null,
+    email: string | null,
+  ) {
+    let user = await this.usersService.findUserByProvider(provider, profileId);
 
     //初回ログイン時はユーザー登録
     if (!user) {
-      user = await this.usersService.createGoogleUser(profileId, username, email);
+      user = await this.usersService.createOAuthUser(provider, profileId, username, email);
     }
 
     const payload = { sub: user.id, email: user.email, username: user.name };

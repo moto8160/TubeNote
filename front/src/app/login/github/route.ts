@@ -1,9 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
-// サーバーアクションがうまくいかずルートハンドラを使用
-// Nestjsからのコールバックを処理する
-
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const token = url.searchParams.get('token');
