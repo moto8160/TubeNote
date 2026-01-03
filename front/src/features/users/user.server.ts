@@ -1,7 +1,27 @@
 'use server';
 import { fetchWithToken } from '@/utils/fetchWithToken';
-import { CreateUserResult, MyPageResponse, MyPostsResponse } from './user.type';
+import { CreateUserResult, MyPageResponse, MyPostsResponse, UpdateUserResult } from './user.type';
 import { notFound } from 'next/navigation';
+
+export async function fetchMyPosts(): Promise<MyPostsResponse> {
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/me`);
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  return res.json();
+}
+
+export async function fetchMyPage(): Promise<MyPageResponse> {
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/mypage`);
+
+  if (!res.ok) {
+    notFound();
+  }
+
+  return res.json();
+}
 
 export async function createUser(formData: FormData): Promise<CreateUserResult> {
   const name = formData.get('name');
@@ -23,9 +43,7 @@ export async function createUser(formData: FormData): Promise<CreateUserResult> 
   return json;
 }
 
-
-//ここのバックから作成
-export async function updateUser(formData: FormData): Promise<> {
+export async function updateUser(formData: FormData): Promise<UpdateUserResult> {
   const isLocal = formData.get('isLocal') === 'true';
   const name = formData.get('name');
   const email = formData.get('email');
@@ -49,24 +67,4 @@ export async function updateUser(formData: FormData): Promise<> {
   }
 
   return json;
-}
-
-export async function fetchMyPosts(): Promise<MyPostsResponse> {
-  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/me`);
-
-  if (!res.ok) {
-    notFound();
-  }
-
-  return res.json();
-}
-
-export async function fetchMyPage(): Promise<MyPageResponse> {
-  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/users/mypage`);
-
-  if (!res.ok) {
-    notFound();
-  }
-
-  return res.json();
 }

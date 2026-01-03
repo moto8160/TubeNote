@@ -29,3 +29,4 @@ export type MyPageResponse = {
 };
 
 export type CreateUserResult = { success: true } | { success: false; message: string };
+export type UpdateUserResult = { success: true } | { success: false; message: string };

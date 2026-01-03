@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
-import { CreateUserDto } from './user.dto';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
 import * as bcrypt from 'bcrypt';
 import { Provider, User } from '@prisma/client';
 import { MyPageResponse, MyPostsResponse } from './user.type';
@@ -57,36 +57,40 @@ export class UsersService {
     return { user, postCount, videoCount };
   }
 
-  async findUserByEmail(email: string): Promise<User | null> {
-    return this.prisma.user.findUnique({
-      where: { email },
-    });
-  }
-
-  async findUserByProvider(provider: Provider, providerId: string): Promise<User | null> {
-    return this.prisma.user.findFirst({
-      where: { provider, providerId },
-    });
-  }
-
   async createUser(dto: CreateUserDto) {
     const { name, email, password, passwordConfirm } = dto;
 
-    if (password !== passwordConfirm) {
-      throw new BadRequestException('パスワードが一致しません');
-    }
+    this.assertPasswordMatch(password, passwordConfirm);
+    await this.assertEmailNotExist(email);
 
-    const user = await this.prisma.user.findUnique({
-      where: { email },
-    });
-    if (user) {
-      throw new BadRequestException('メールアドレスが登録済みです');
-    }
-
-    const hash = await bcrypt.hash(password, 10);
-
+    const hashedPassword = await bcrypt.hash(password, 10);
     await this.prisma.user.create({
-      data: { name, email, password: hash },
+      data: { name, email, password: hashedPassword },
+    });
+  }
+
+  async updateUser(userId: number, dto: UpdateUserDto) {
+    const { name, email, password, passwordConfirm } = dto;
+    let hashedPassword: string | undefined;
+
+    if (password || passwordConfirm) {
+      this.assertPasswordMatch(password, passwordConfirm);
+      hashedPassword = await bcrypt.hash(password, 10);
+    }
+
+    const user = await this.prisma.user.findUniqueOrThrow({
+      where: { id: userId },
+      select: { email: true },
+    });
+
+    // 変更ない場合はチェックしない
+    if (email && email !== user.email) {
+      await this.assertEmailNotExist(email);
+    }
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { name, email, password: hashedPassword }, //undefinedなら更新対象外
     });
   }
 
@@ -108,5 +112,33 @@ export class UsersService {
         email: email || dummyEmail, //ユニーク制約あるため
       },
     });
+  }
+
+  async findUserByEmail(email: string): Promise<User | null> {
+    return this.prisma.user.findUnique({
+      where: { email },
+    });
+  }
+
+  async findUserByProvider(provider: Provider, providerId: string): Promise<User | null> {
+    return this.prisma.user.findFirst({
+      where: { provider, providerId },
+    });
+  }
+
+  private assertPasswordMatch(password: string, passwordConfirm: string) {
+    if (password !== passwordConfirm) {
+      throw new BadRequestException('パスワードが一致しません');
+    }
+  }
+
+  private async assertEmailNotExist(email: string) {
+    const user = await this.prisma.user.findUnique({
+      where: { email },
+    });
+
+    if (user) {
+      throw new BadRequestException('メールアドレスが登録済みです');
+    }
   }
 }

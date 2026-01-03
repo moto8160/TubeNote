@@ -1,9 +1,8 @@
 'use client';
-import { login } from '@/features/login/login.server';
-import { createUser, updateUser } from '@/features/users/user.server';
-import { redirect } from 'next/navigation';
+import { updateUser } from '@/features/users/user.server';
 import { useState } from 'react';
 import { MyPageResponse } from '../user.type';
+import { redirect } from 'next/navigation';
 
 type Props = {
   user: MyPageResponse;
@@ -11,7 +10,6 @@ type Props = {
 
 export default function EditForm({ user }: Props) {
   const isLocal = user.user.provider === 'local';
-  // userあり（編集ページ）時は、修正前を初期値にする
   const [name, setName] = useState(user.user.name);
   const [email, setEmail] = useState(user.user.email);
   const [password, setPassword] = useState('');
@@ -24,8 +22,14 @@ export default function EditForm({ user }: Props) {
       <form
         // Server Actions
         action={async (formData: FormData) => {
-          const updateResult = await updateUser(formData);
-          //更新後処理
+          const result = await updateUser(formData);
+
+          if (!result.success) {
+            setMessage(result.message);
+            return;
+          }
+
+          redirect('/mypage?success=6');
         }}
       >
         <input type="hidden" name="isLocal" value={String(isLocal)} />

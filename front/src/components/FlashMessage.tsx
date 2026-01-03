@@ -27,6 +27,9 @@ export default function FlashMessage() {
     case '5':
       message = '投稿を更新しました';
       break;
+    case '6':
+      message = 'ユーザー情報を更新しました';
+      break;
   }
 
   switch (error) {
