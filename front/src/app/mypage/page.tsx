@@ -30,7 +30,7 @@ export default async function MyPage() {
             </p>
             <p>
               <span className="font-medium text-gray-700">登録日： </span>
-              {new Date(data.user.createdAt).toLocaleDateString()}
+              {new Date(data.user.createdAt).toLocaleDateString('ja-JP')}
             </p>
           </div>
         </div>

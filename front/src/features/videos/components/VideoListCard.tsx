@@ -42,7 +42,7 @@ export default function VideoListCard({ video }: Props) {
         <p className="text-xs text-gray-600 mb-4">{video.authorName}</p>
 
         <div className="flex items-baseline gap-2">
-          <span className="font-semibold text-gray-800">{latestPost.user.name}</span>
+          <span className="font-medium text-gray-800 mb-1">{latestPost.user.name}</span>
           <span className="text-xs text-gray-400">
             {new Date(latestPost.updatedAt).toLocaleDateString('ja-JP')}
           </span>
