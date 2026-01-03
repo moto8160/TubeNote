@@ -1,4 +1,4 @@
-import { Like, Video } from '@prisma/client';
+import { Like, Provider, Video } from '@prisma/client';
 
 export type MyPostsResponse = {
   id: number;
@@ -18,6 +18,7 @@ export type MyPageResponse = {
     id: number;
     name: string;
     email: string;
+    provider: Provider;
     createdAt: Date;
   };
   postCount: number;
