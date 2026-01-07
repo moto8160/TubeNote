@@ -10,7 +10,7 @@ YouTube 動画にメモを残し、内容を記録・共有できる Web アプ�
 
 ログインから新規投稿までの一連の操作を確認できます。
 
-![デモ動画](docs/images/demo.gif)
+<img src="docs/images/demo.gif" width="600" />
 
 ---
 
