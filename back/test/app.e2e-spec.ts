@@ -16,10 +16,7 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+  it('GET /posts は未認証だと 401', async () => {
+    await request(app.getHttpServer()).get('/posts').expect(401);
   });
 });

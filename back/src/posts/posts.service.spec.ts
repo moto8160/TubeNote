@@ -1,8 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsService } from './posts.service';
 import { VideosService } from 'src/videos/videos.service';
-import { PrismaService } from 'src/prisma.service';
 import { ForbiddenException } from '@nestjs/common';
+import { PrismaService } from '../prisma.service';
+
 describe('PostsService', () => {
   let service: PostsService;
 
