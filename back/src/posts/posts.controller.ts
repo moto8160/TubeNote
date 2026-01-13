@@ -17,6 +17,7 @@ import type { JwtRequest } from 'src/auth/auth.type';
 import {
   PostCreateResponse,
   PostDeleteResponse,
+  PostDetailResponse,
   PostListResponse,
   SuccessResponse,
 } from './post.type';
@@ -32,7 +33,7 @@ export class PostsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<PostDetailResponse> {
     return this.postsService.findOne(id);
   }
 
