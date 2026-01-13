@@ -14,7 +14,12 @@ import { PostsService } from './posts.service';
 import { CreatePostDto, UpdatePostDto } from './post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import type { JwtRequest } from 'src/auth/auth.type';
-import { PostDeleteResponse, PostListResponse, SuccessResponse } from './post.type';
+import {
+  PostCreateResponse,
+  PostDeleteResponse,
+  PostListResponse,
+  SuccessResponse,
+} from './post.type';
 
 @Controller('posts')
 export class PostsController {
@@ -33,9 +38,12 @@ export class PostsController {
 
   @UseGuards(JwtAuthGuard)
   @Post()
-  async create(@Body() dto: CreatePostDto, @Request() req: JwtRequest): Promise<SuccessResponse> {
-    await this.postsService.create(req.user.userId, dto);
-    return { success: true };
+  async create(
+    @Body() dto: CreatePostDto,
+    @Request() req: JwtRequest,
+  ): Promise<PostCreateResponse> {
+    const post = await this.postsService.create(req.user.userId, dto);
+    return { success: true, postId: post.id };
   }
 
   @UseGuards(JwtAuthGuard)
