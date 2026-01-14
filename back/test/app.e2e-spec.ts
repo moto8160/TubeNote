@@ -11,25 +11,33 @@ describe('posts E2E', () => {
 
   // テスト開始前に1回実行
   beforeAll(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [AppModule],
-    }).compile();
+    try {
+      const moduleFixture: TestingModule = await Test.createTestingModule({
+        imports: [AppModule],
+      }).compile();
 
-    app = moduleFixture.createNestApplication();
-    await app.init();
+      app = moduleFixture.createNestApplication();
+      await app.init();
 
-    // テスト用ユーザーでログイン
-    const res = await request(app.getHttpServer())
-      .post('/auth/login')
-      .send({
+      // テスト用ユーザーでログイン
+      const res = await request(app.getHttpServer()).post('/auth/login').send({
         email: 'testuser@example.com',
         password: 'testuser',
         remember: false,
-      })
-      .expect(201);
+      });
 
-    const body = res.body as { access_token: string };
-    accessToken = body.access_token;
+      if (res.status !== 201) {
+        console.error('Login failed with status:', res.status);
+        console.error('Response body:', res.body);
+        throw new Error(`Login failed: ${res.status} - ${JSON.stringify(res.body)}`);
+      }
+
+      const body = res.body as { access_token: string };
+      accessToken = body.access_token;
+    } catch (error) {
+      console.error('beforeAll error:', error);
+      throw error;
+    }
   });
 
   it('未認証の時、401', async () => {
