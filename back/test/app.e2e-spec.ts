@@ -4,6 +4,7 @@ import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
 import { PrismaService } from 'src/prisma.service';
+import * as bcrypt from 'bcrypt';
 
 describe('posts E2E', () => {
   let app: INestApplication<App>;
@@ -30,7 +31,7 @@ describe('posts E2E', () => {
       data: {
         name: 'test user',
         email: 'testuser@example.com',
-        password: 'password',
+        password: await bcrypt.hash('password', 10),
       },
     });
 
