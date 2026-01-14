@@ -24,6 +24,7 @@ jobs:
       - name: Test Backend
         working-directory: back
         env:
+          DATABASE_URL: postgresql://postgres:password@localhost:5432/app
           JWT_SECRET: secret
           GOOGLE_CLIENT_ID: dummy
           GOOGLE_CLIENT_SECRET: dummy
