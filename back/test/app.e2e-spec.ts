@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import request from 'supertest';
 import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
+import { PrismaService } from 'src/prisma.service';
 
 describe('posts E2E', () => {
   let app: INestApplication<App>;
@@ -11,33 +12,39 @@ describe('posts E2E', () => {
 
   // テスト開始前に1回実行
   beforeAll(async () => {
-    try {
-      const moduleFixture: TestingModule = await Test.createTestingModule({
-        imports: [AppModule],
-      }).compile();
+    const moduleFixture: TestingModule = await Test.createTestingModule({
+      imports: [AppModule],
+    }).compile();
 
-      app = moduleFixture.createNestApplication();
-      await app.init();
+    app = moduleFixture.createNestApplication();
+    await app.init();
 
-      // テスト用ユーザーでログイン
-      const res = await request(app.getHttpServer()).post('/auth/login').send({
+    // テストユーザーの準備
+    const prisma = app.get(PrismaService);
+
+    await prisma.user.deleteMany({
+      where: { email: 'testuser@example.com' },
+    });
+
+    await prisma.user.create({
+      data: {
+        name: 'test user',
         email: 'testuser@example.com',
-        password: 'testuser',
+        password: 'password',
+      },
+    });
+
+    const res = await request(app.getHttpServer())
+      .post('/auth/login')
+      .send({
+        email: 'testuser@example.com',
+        password: 'password',
         remember: false,
-      });
+      })
+      .expect(201);
 
-      if (res.status !== 201) {
-        console.error('Login failed with status:', res.status);
-        console.error('Response body:', res.body);
-        throw new Error(`Login failed: ${res.status} - ${JSON.stringify(res.body)}`);
-      }
-
-      const body = res.body as { access_token: string };
-      accessToken = body.access_token;
-    } catch (error) {
-      console.error('beforeAll error:', error);
-      throw error;
-    }
+    const body = res.body as { access_token: string };
+    accessToken = body.access_token;
   });
 
   it('未認証の時、401', async () => {
