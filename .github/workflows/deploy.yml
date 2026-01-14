@@ -1,5 +1,5 @@
 #GitHub Actions名
-name: Deploy to Lightsail
+name: CI/CD
 
 #実行タイミング
 on:
@@ -9,13 +9,33 @@ on:
 #job定義
 jobs:
   #job名定義（並列実行）
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Test Backend
+        working-directory: back
+        run: |
+          npm install
+          npm test
+          npm run test:e2e
+
   deploy:
+    needs: test #先行JOBの正常終了後に実行
     runs-on: ubuntu-latest #job実行するOS(ランナー)
 
     steps:
       #リポジトリをこの環境に取り込み
       - name: Checkout repository #step名
-        uses: actions/checkout@v3 #外部のAction
+        uses: actions/checkout@v4 #外部のAction
 
       - name: GitHub Secretsから秘密鍵をインストール
         uses: webfactory/ssh-agent@v0.5.4
