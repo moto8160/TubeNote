@@ -23,9 +23,11 @@ jobs:
 
       - name: Test Backend
         working-directory: back
+        env:
+          JWT_SECRET: nS9k!G4vJ3mP0xQ7*Z1fB8eL2rW6dC@
         run: |
           npm install
-          npm test
+          npm run test
           npm run test:e2e
 
   deploy:
