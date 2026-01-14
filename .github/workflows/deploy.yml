@@ -12,6 +12,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    services: #Dockerコンテナとして起動
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: app
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -24,7 +34,7 @@ jobs:
       - name: Test Backend
         working-directory: back
         env:
-          DATABASE_URL: postgresql://postgres:password@localhost:5432/app
+          DATABASE_URL: postgresql://test:test@localhost:5432/app
           JWT_SECRET: secret
           GOOGLE_CLIENT_ID: dummy
           GOOGLE_CLIENT_SECRET: dummy
@@ -34,6 +44,7 @@ jobs:
           GITHUB_CALLBACK_URL: dummy
         run: |
           npm install
+          npx prisma migrate deploy
           npm run test
           npm run test:e2e
 
