@@ -38,11 +38,11 @@ export class PostsService {
     });
   }
 
-  async create(userId: number, dto: CreatePostDto) {
+  async create(userId: number, dto: CreatePostDto): Promise<Post> {
     // 未登録なら動画登録する
     const video = await this.videosService.findOrCreateByUrl(dto.videoUrl);
 
-    await this.prisma.post.create({
+    return this.prisma.post.create({
       data: { userId, videoId: video.id, text: dto.text },
     });
   }

@@ -53,7 +53,7 @@ describe('PostsController', () => {
 
   it('create', async () => {
     const dto = { videoUrl: 'url', text: 'text' };
-    const spy = jest.spyOn(postsService, 'create').mockResolvedValue(undefined);
+    const spy = jest.spyOn(postsService, 'create').mockResolvedValue({} as any);
 
     const result = await controller.create(dto, req as any);
 

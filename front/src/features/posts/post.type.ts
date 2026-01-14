@@ -32,5 +32,7 @@ export type PostDetailResponse = Post & {
   video: Video;
 };
 
-export type CreatePostResult = { success: true } | { success: false; message: string };
+export type CreatePostResult =
+  | { success: true; postId: number }
+  | { success: false; message: string };
 export type UpdatePostResult = { success: true } | { success: false; message: string };

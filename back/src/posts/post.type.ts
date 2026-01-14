@@ -21,6 +21,11 @@ export type SuccessResponse = {
   success: true;
 };
 
+export type PostCreateResponse = {
+  success: true;
+  postId: number;
+};
+
 export type PostDeleteResponse = {
   success: true;
   videoDeleted: boolean;
