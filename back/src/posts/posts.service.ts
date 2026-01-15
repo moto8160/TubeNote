@@ -43,7 +43,7 @@ export class PostsService {
     const video = await this.videosService.findOrCreateByUrl(dto.videoUrl);
 
     return this.prisma.post.create({
-      data: { userId, videoId: video.id, text: dto.text },
+      data: { userId, videoId: video.id, text: dto.text, status: dto.status },
     });
   }
 

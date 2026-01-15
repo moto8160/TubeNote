@@ -59,6 +59,7 @@ describe('posts E2E', () => {
       .send({
         videoUrl: 'https://www.youtube.com/watch?v=TRcquLFgiWU',
         text: 'test',
+        status: 'public',
       })
       .expect(201); //Created
 
@@ -86,6 +87,7 @@ describe('posts E2E', () => {
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         text: 'test updated',
+        status: 'private',
       })
       .expect(200);
 
