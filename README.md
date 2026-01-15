@@ -45,11 +45,11 @@ YouTube を使用した学習時の「あとで見返したい」「メモをま
 
 ## 主な機能
 
-- ノートの投稿
+- ノートの投稿・編集・削除
 - ノートの表示（動画ごと・投稿ごと）
 - いいね機能
-- ユーザー登録
-- ログイン（Local / Google / GitHub）
+- ユーザー登録・編集
+- ログイン（Local / Google / GitHub / Guest）
 
 ---
 
@@ -61,7 +61,7 @@ YouTube を使用した学習時の「あとで見返したい」「メモをま
 | Backend                 | TypeScript, NestJS, Prisma    |
 | Infrastructure          | AWS Lightsail, Nginx, PM2     |
 | Database                | PostgreSQL                    |
-| Development Environment | Docker（PostgreSQL のみ）     |
+| Development Environment | Docker（PostgreSQL のみ）      |
 | CI/CD                   | GitHub Actions                |
 | Design                  | Tailwind CSS                  |
 | Others                  | ESLint, Prettier, Git, GitHub |
@@ -86,11 +86,10 @@ YouTube を使用した学習時の「あとで見返したい」「メモをま
 
 単に機能を実装するだけでなく、実務での利用や運用を意識した設計を行いました。
 
-- フロントエンドとバックエンドを分離し、それぞれの責務が明確になる構成にしています。
-- 認証は JWT をベースに、Google・GitHub OAuth を組み合わせることで、将来的な拡張を意識した設計にしました。
-- 可読性を重視し、読み手が理解しやすいコード構成を意識して実装しています。
-- コンポーネント化を行い、保守性・再利用性を高めました。
-- エラー発生時のケースを想定し、適切なレスポンスを返すエラーハンドリングを実装しています。
+- フロントエンドとバックエンドを分離し、それぞれの責務が明確になる構成を採用
+- 認証は JWT をベースに、パスワード と OAuth のログイン方法に対応 
+- 可読性を重視したコード設計や、コンポーネント化による保守性を意識
+- oEmbed を利用して、動画情報の埋め込み表示を実装
 
 ---
 
