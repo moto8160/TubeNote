@@ -12,7 +12,6 @@ export default function VideoListCard({ video, currentUserId }: Props) {
   const latestPost = video.posts[0];
   const isOwner = currentUserId === latestPost.userId;
   const isPrivate = latestPost.status === 'private';
-  console.log(isOwner, isPrivate);
 
   return (
     <Link

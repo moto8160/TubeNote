@@ -6,6 +6,8 @@ export function EditPrivatePost(
   postUserId: number,
   currentUserId: number,
 ): string {
+  console.log(postText);
+  console.log(postStatus);
   const isPrivate = postStatus === PostStatus.private;
   const isOwner = postUserId === currentUserId;
 
