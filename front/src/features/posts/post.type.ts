@@ -1,10 +1,13 @@
 import { Video } from '../videos/video.type';
 
+export type PostStatus = 'public' | 'private';
+
 export type Post = {
   id: number;
   userId: number;
   videoId: number;
   text: string;
+  status: PostStatus;
   createdAt: string;
   updatedAt: string;
 };

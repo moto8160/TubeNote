@@ -2,13 +2,14 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service';
 import { Video } from '@prisma/client';
 import { VideoDetailResponse, VideoListResponse, YoutubeOEmbedResponse } from './video.type';
+import { EditPrivatePost } from 'src/posts/post.utils';
 
 @Injectable()
 export class VideosService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async findAll(): Promise<VideoListResponse[]> {
-    return this.prisma.video.findMany({
+  async findAll(userId: number): Promise<VideoListResponse[]> {
+    const videos = await this.prisma.video.findMany({
       include: {
         _count: { select: { posts: true } },
         posts: {
@@ -21,6 +22,14 @@ export class VideosService {
       },
       orderBy: { updatedAt: 'desc' },
     });
+
+    return videos.map((video) => ({
+      ...video,
+      posts: video.posts.map((post) => ({
+        ...post,
+        text: EditPrivatePost(post.status, post.text, post.userId, userId),
+      })),
+    }));
   }
 
   async findOne(videoId: number, userId: number): Promise<VideoDetailResponse> {
@@ -43,6 +52,7 @@ export class VideosService {
       ...video,
       posts: video.posts.map((post) => ({
         ...post,
+        text: EditPrivatePost(post.status, post.text, post.userId, userId),
         isLiked: post.likes.length > 0,
       })),
     };

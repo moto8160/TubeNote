@@ -17,9 +17,10 @@ import type { JwtRequest } from 'src/auth/auth.type';
 export class VideosController {
   constructor(private readonly videosService: VideosService) {}
 
+  @UseGuards(JwtAuthGuard)
   @Get()
-  async findAll(): Promise<VideoListResponse[]> {
-    return this.videosService.findAll();
+  async findAll(@Request() req: JwtRequest): Promise<VideoListResponse[]> {
+    return this.videosService.findAll(req.user.userId);
   }
 
   @UseGuards(JwtAuthGuard)

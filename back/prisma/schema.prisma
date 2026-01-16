@@ -21,6 +21,11 @@ enum Provider {
   github
 }
 
+enum PostStatus{
+  public
+  private
+}
+
 model User {
   id            Int         @id @default(autoincrement())
   name          String
@@ -40,6 +45,7 @@ model Post {
   userId        Int         
   videoId       Int
   text          String
+  status        PostStatus  @default(public)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
       

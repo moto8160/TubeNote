@@ -14,6 +14,7 @@ export default function PostListCard({ post, currentUserId }: Props) {
       <PostCardContent
         id={post.id}
         text={post.text}
+        status={post.status}
         updatedAt={post.updatedAt}
         userId={post.user.id}
         username={post.user.name}

@@ -5,10 +5,14 @@ import PostContent from '@/features/posts/components/PostContent';
 
 type Props = {
   video: VideoListResponse;
+  currentUserId: number | null;
 };
 
-export default function VideoListCard({ video }: Props) {
+export default function VideoListCard({ video, currentUserId }: Props) {
   const latestPost = video.posts[0];
+  const isOwner = currentUserId === latestPost.userId;
+  const isPrivate = latestPost.status === 'private';
+  console.log(isOwner, isPrivate);
 
   return (
     <Link
@@ -46,7 +50,17 @@ export default function VideoListCard({ video }: Props) {
           <span className="text-xs text-gray-400">
             {new Date(latestPost.updatedAt).toLocaleDateString('ja-JP')}
           </span>
+
+          {isOwner && isPrivate && (
+            <span
+              className="flex items-center gap-1 text-xs px-2 py-0.5 rounded-full 
+                       bg-gray-100 text-gray-600 border border-gray-300"
+            >
+              🔒 非公開
+            </span>
+          )}
         </div>
+
         <PostContent text={latestPost.text} clampHeight="h-28" />
       </div>
     </Link>

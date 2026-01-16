@@ -39,6 +39,7 @@ export default function VideoDetailCard({ video, currentUserId }: Props) {
                 <PostCardContent
                   id={post.id}
                   text={post.text}
+                  status={post.status}
                   updatedAt={post.updatedAt}
                   userId={post.user.id}
                   username={post.user.name}

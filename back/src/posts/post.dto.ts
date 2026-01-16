@@ -8,10 +8,16 @@ export class CreatePostDto {
   @IsString()
   @IsNotEmpty({ message: 'ノートが未入力です。' })
   text: string;
+
+  @IsNotEmpty()
+  status: 'public' | 'private';
 }
 
 export class UpdatePostDto {
   @IsString()
   @IsNotEmpty({ message: 'ノートが未入力です。' })
   text: string;
+
+  @IsNotEmpty()
+  status: 'public' | 'private';
 }
