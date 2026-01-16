@@ -12,13 +12,13 @@ export default function CreateForm() {
   const [video, setVideo] = useState<YoutubeOEmbedResponse | null>(null);
   const [urlMessage, setUrlMessage] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'public' | 'private'>('public');
 
   // URL入力が変わる毎にフェッチ（500msでデバウンス）
   useEffect(() => {
     if (!url) return;
 
     const timer = setTimeout(() => {
-      // Server Actions
       startTransition(async () => {
         const result = await fetchOEmbed(url);
 
@@ -100,9 +100,39 @@ export default function CreateForm() {
           )}
         </div>
 
-        {/* テキスト */}
+        {/* ノート */}
         <div>
-          <label className="block text-sm font-medium mb-2">ノート</label>
+          <div className="flex items-start gap-6 mb-2">
+            <label className="block text-sm font-medium">ノート</label>
+
+            {/* 公開設定 */}
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="status"
+                  value={status}
+                  checked={status === 'public'}
+                  onChange={() => setStatus('public')}
+                  className="accent-blue-500"
+                />
+                <span className="text-sm">公開</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="status"
+                  value={status}
+                  checked={status === 'private'}
+                  onChange={() => setStatus('private')}
+                  className="accent-blue-500"
+                />
+                <span className="text-sm">非公開</span>
+              </label>
+            </div>
+          </div>
+
           <textarea
             name="text"
             value={text}

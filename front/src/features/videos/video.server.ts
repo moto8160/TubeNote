@@ -4,7 +4,7 @@ import { fetchOEmbedResult, VideoDetailResponse, VideoListResponse } from '../vi
 import { fetchWithToken } from '@/utils/fetchWithToken';
 
 export async function fetchVideos(): Promise<VideoListResponse[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/videos`);
+  const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/videos`);
 
   if (!res.ok) {
     notFound();

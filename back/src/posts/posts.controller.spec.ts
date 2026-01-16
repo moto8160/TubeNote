@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostsController } from './posts.controller';
 import { PostsService } from './posts.service';
+import { PostStatus } from '@prisma/client';
 
 describe('PostsController', () => {
   let controller: PostsController;
@@ -52,7 +53,7 @@ describe('PostsController', () => {
   });
 
   it('create', async () => {
-    const dto = { videoUrl: 'url', text: 'text' };
+    const dto = { videoUrl: 'url', text: 'text', status: PostStatus.public };
     const spy = jest.spyOn(postsService, 'create').mockResolvedValue({} as any);
 
     const result = await controller.create(dto, req as any);
@@ -63,7 +64,7 @@ describe('PostsController', () => {
 
   it('update', async () => {
     const post = { id: POST_ID };
-    const dto = { text: 'text' };
+    const dto = { text: 'text', status: PostStatus.public };
     const spy = jest.spyOn(postsService, 'update').mockResolvedValue(undefined);
 
     const result = await controller.update(post.id, dto, req as any);

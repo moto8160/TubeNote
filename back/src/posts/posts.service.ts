@@ -4,6 +4,7 @@ import { CreatePostDto, UpdatePostDto } from './post.dto';
 import { VideosService } from 'src/videos/videos.service';
 import { Post } from '@prisma/client';
 import { PostDetailResponse, PostListResponse } from './post.type';
+import { EditPrivatePost } from './post.utils';
 
 @Injectable()
 export class PostsService {
@@ -25,6 +26,7 @@ export class PostsService {
 
     return posts.map((post) => ({
       ...post,
+      text: EditPrivatePost(post.status, post.text, post.userId, userId),
       isLiked: post.likes.length > 0,
     }));
   }

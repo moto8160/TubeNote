@@ -19,6 +19,7 @@ export type VideoListResponse = Video & {
     userId: number;
     videoId: number;
     text: string;
+    status: 'public' | 'private';
     createdAt: string;
     updatedAt: string;
     user: {
@@ -35,6 +36,7 @@ export type VideoDetailResponse = Video & {
     userId: number;
     videoId: number;
     text: string;
+    status: 'public' | 'private';
     createdAt: string;
     updatedAt: string;
     user: {

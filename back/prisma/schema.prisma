@@ -45,7 +45,7 @@ model Post {
   userId        Int         
   videoId       Int
   text          String
-  status        PostStatus  @default(private)
+  status        PostStatus  @default(public)
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
       

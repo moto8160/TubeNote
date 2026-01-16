@@ -5,6 +5,7 @@ export type Post = {
   userId: number;
   videoId: number;
   text: string;
+  status: 'public' | 'private';
   createdAt: string;
   updatedAt: string;
 };

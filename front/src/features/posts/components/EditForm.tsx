@@ -14,6 +14,7 @@ export default function EditForm({ postId }: Props) {
   const [video, setVideo] = useState<Video | null>(null);
   const [text, setText] = useState('');
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'public' | 'private'>('public');
 
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get('redirect');
@@ -23,6 +24,7 @@ export default function EditForm({ postId }: Props) {
       const post = await fetchDetailPost(postId);
       setVideo(post.video);
       setText(post.text);
+      setStatus(post.status);
     };
 
     fetch();
@@ -87,7 +89,40 @@ export default function EditForm({ postId }: Props) {
       >
         <input type="hidden" name="postId" value={postId} />
 
-        <label className="block text-sm font-medium mb-2">ノート</label>
+        {/* ノート */}
+        <div>
+          <div className="flex items-start gap-6 mb-2">
+            <label className="block text-sm font-medium">ノート</label>
+
+            {/* 公開設定 */}
+            <div className="flex gap-4">
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="status"
+                  value={status}
+                  checked={status === 'public'}
+                  onChange={() => setStatus('public')}
+                  className="accent-blue-500"
+                />
+                <span className="text-sm">公開</span>
+              </label>
+
+              <label className="flex items-center gap-2 cursor-pointer">
+                <input
+                  type="radio"
+                  name="status"
+                  value={status}
+                  checked={status === 'private'}
+                  onChange={() => setStatus('private')}
+                  className="accent-blue-500"
+                />
+                <span className="text-sm">非公開</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
         <textarea
           name="text"
           value={text}

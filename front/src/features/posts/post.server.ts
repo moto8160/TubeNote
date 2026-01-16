@@ -33,10 +33,11 @@ export async function fetchDetailPost(postId: number): Promise<PostDetailRespons
 export async function createPost(formData: FormData): Promise<CreatePostResult> {
   const videoUrl = formData.get('url');
   const text = formData.get('text');
+  const status = formData.get('status');
 
   const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts`, {
     method: 'POST',
-    body: JSON.stringify({ videoUrl, text }),
+    body: JSON.stringify({ videoUrl, text, status }),
   });
 
   const json = await res.json();
@@ -51,10 +52,11 @@ export async function createPost(formData: FormData): Promise<CreatePostResult> 
 export async function updatePost(formData: FormData): Promise<UpdatePostResult> {
   const postId = formData.get('postId');
   const text = formData.get('text');
+  const status = formData.get('status');
 
   const res = await fetchWithToken(`${process.env.NEXT_PUBLIC_API_URL}/posts/${postId}`, {
     method: 'PUT',
-    body: JSON.stringify({ text }),
+    body: JSON.stringify({ text, status }),
   });
 
   const json = await res.json();
