@@ -1,4 +1,4 @@
-import { Like } from '../posts/post.type';
+import { Like, PostStatus } from '../posts/post.type';
 
 export type Video = {
   id: number;
@@ -19,7 +19,7 @@ export type VideoListResponse = Video & {
     userId: number;
     videoId: number;
     text: string;
-    status: 'public' | 'private';
+    status: PostStatus;
     createdAt: string;
     updatedAt: string;
     user: {
@@ -36,7 +36,7 @@ export type VideoDetailResponse = Video & {
     userId: number;
     videoId: number;
     text: string;
-    status: 'public' | 'private';
+    status: PostStatus;
     createdAt: string;
     updatedAt: string;
     user: {

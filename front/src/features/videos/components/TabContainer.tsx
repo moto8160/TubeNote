@@ -58,7 +58,7 @@ export default function TabContainer({ videos, posts, currentUserId }: Props) {
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {videos.map((video) => (
             <li key={video.id}>
-              <VideoListCard video={video} />
+              <VideoListCard video={video} currentUserId={currentUserId} />
             </li>
           ))}
         </ul>
